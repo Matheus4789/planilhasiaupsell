@@ -242,6 +242,110 @@
     </div>
   </section>
 
+  <!-- ============ EXEMPLOS REAIS (GALERIA) ============ -->
+  <section class="bg-white border-b-2 border-black py-16 lg:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto">
+        <h2 class="mt-5 font-heading font-extrabold tracking-tighter text-3xl sm:text-4xl">Planilhas e dashboards criados com o método</h2>
+        <p class="mt-3 font-medium text-black/70">Tudo isto foi montado conversando com a IA. Você vai aprender a criar exatamente assim, do zero.</p>
+      </div>
+
+      <div id="ex-viewport" class="mt-12 ex-viewport">
+        <div id="ex-track" class="ex-track">
+
+        <figure class="ex-card">
+          <img src="planilhas%20exemplos/dashvendas.png" alt="Dashboard de vendas criado com IA" loading="lazy" class="w-full block bg-soft" />
+        </figure>
+
+        <figure class="ex-card">
+          <img src="planilhas%20exemplos/1_vMTpFA_OLXgFI3Gih77sxg.png" alt="Relatório de vendas em Power BI criado com IA" loading="lazy" class="w-full block bg-soft" />
+        </figure>
+
+        <figure class="ex-card">
+          <img src="planilhas%20exemplos/1674241624815.jpeg" alt="Painel financeiro de investimentos e gastos criado com IA" loading="lazy" class="w-full block bg-soft" />
+        </figure>
+
+        <figure class="ex-card">
+          <img src="planilhas%20exemplos/2020-03-24-16_52_41-Dashboard-SAC-Dark-Power-BI-Desktop-1024x575.png" alt="Dashboard de atendimento (SAC) criado com IA" loading="lazy" class="w-full block bg-soft" />
+        </figure>
+
+        <figure class="ex-card">
+          <img src="planilhas%20exemplos/260120221643174101cursodepowerbiparaempresas.png" alt="Painel gerencial empresarial criado com IA" loading="lazy" class="w-full block bg-soft" />
+        </figure>
+
+        <figure class="ex-card">
+          <img src="planilhas%20exemplos/DASHBOARD-1-1024x575.png" alt="Dashboard de indicadores (KPIs) criado com IA" loading="lazy" class="w-full block bg-soft" />
+        </figure>
+
+        <figure class="ex-card">
+          <img src="planilhas%20exemplos/hq720.jpg" alt="Controle de vendas de eletrônicos criado com IA" loading="lazy" class="w-full block bg-soft" />
+        </figure>
+
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          var vp = document.getElementById("ex-viewport");
+          var t = document.getElementById("ex-track");
+          if (!vp || !t) return;
+
+          t.innerHTML += t.innerHTML; // duplica para loop infinito nos dois sentidos
+
+          var half = 0;
+          function measure(){ half = t.scrollWidth / 2; }
+          measure();
+          window.addEventListener("load", measure);
+          window.addEventListener("resize", measure);
+          if (window.ResizeObserver) new ResizeObserver(measure).observe(t);
+
+          // loop infinito ao rolar/arrastar
+          vp.addEventListener("scroll", function () {
+            if (!half) return;
+            if (vp.scrollLeft >= half) vp.scrollLeft -= half;
+            else if (vp.scrollLeft <= 0) vp.scrollLeft += half;
+          });
+
+          // arrastar com o mouse
+          var dragging = false, startX = 0, startScroll = 0, paused = false, rT;
+          function resumeSoon(){ clearTimeout(rT); rT = setTimeout(function () { paused = false; }, 1400); }
+          vp.addEventListener("mousedown", function (e) {
+            dragging = true; paused = true;
+            startX = e.pageX; startScroll = vp.scrollLeft;
+            vp.classList.add("dragging"); e.preventDefault();
+          });
+          window.addEventListener("mousemove", function (e) {
+            if (!dragging) return;
+            vp.scrollLeft = startScroll - (e.pageX - startX);
+          });
+          window.addEventListener("mouseup", function () {
+            if (!dragging) return;
+            dragging = false; vp.classList.remove("dragging"); resumeSoon();
+          });
+
+          // pausa ao interagir (hover / toque)
+          vp.addEventListener("mouseenter", function () { paused = true; });
+          vp.addEventListener("mouseleave", function () { if (!dragging) resumeSoon(); });
+          vp.addEventListener("touchstart", function () { paused = true; }, { passive: true });
+          vp.addEventListener("touchend", function () { resumeSoon(); }, { passive: true });
+
+          // rolagem automática suave (o dedo/mouse continua funcionando por cima)
+          var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          function tick() {
+            if (!reduce && !paused && !dragging && half) {
+              vp.scrollLeft += 0.8;
+              if (vp.scrollLeft >= half) vp.scrollLeft -= half;
+            }
+            requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        })();
+      </script>
+
+      <p class="mt-8 text-center text-sm font-medium text-black/50">São apenas alguns exemplos, com o <strong class="text-black/70">Método CRIE</strong> você monta qualquer painel sob demanda.</p>
+    </div>
+  </section>
+
   <!-- ============ DEMONSTRAÇÃO: PROMPT -> PLANILHA ============ -->
   <section class="relative bg-brand-mint border-y-2 border-black py-16 lg:py-24 overflow-hidden">
     <div class="absolute inset-0 grid-pattern pointer-events-none"></div>
@@ -536,110 +640,6 @@
         obs.observe(win);
       })();
       </script>
-    </div>
-  </section>
-
-  <!-- ============ EXEMPLOS REAIS (GALERIA) ============ -->
-  <section class="bg-white border-b-2 border-black py-16 lg:py-24">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto">
-        <h2 class="mt-5 font-heading font-extrabold tracking-tighter text-3xl sm:text-4xl">Planilhas e dashboards criados com o método</h2>
-        <p class="mt-3 font-medium text-black/70">Tudo isto foi montado conversando com a IA. Você vai aprender a criar exatamente assim, do zero.</p>
-      </div>
-
-      <div id="ex-viewport" class="mt-12 ex-viewport">
-        <div id="ex-track" class="ex-track">
-
-        <figure class="ex-card">
-          <img src="planilhas%20exemplos/dashvendas.png" alt="Dashboard de vendas criado com IA" loading="lazy" class="w-full block bg-soft" />
-        </figure>
-
-        <figure class="ex-card">
-          <img src="planilhas%20exemplos/1_vMTpFA_OLXgFI3Gih77sxg.png" alt="Relatório de vendas em Power BI criado com IA" loading="lazy" class="w-full block bg-soft" />
-        </figure>
-
-        <figure class="ex-card">
-          <img src="planilhas%20exemplos/1674241624815.jpeg" alt="Painel financeiro de investimentos e gastos criado com IA" loading="lazy" class="w-full block bg-soft" />
-        </figure>
-
-        <figure class="ex-card">
-          <img src="planilhas%20exemplos/2020-03-24-16_52_41-Dashboard-SAC-Dark-Power-BI-Desktop-1024x575.png" alt="Dashboard de atendimento (SAC) criado com IA" loading="lazy" class="w-full block bg-soft" />
-        </figure>
-
-        <figure class="ex-card">
-          <img src="planilhas%20exemplos/260120221643174101cursodepowerbiparaempresas.png" alt="Painel gerencial empresarial criado com IA" loading="lazy" class="w-full block bg-soft" />
-        </figure>
-
-        <figure class="ex-card">
-          <img src="planilhas%20exemplos/DASHBOARD-1-1024x575.png" alt="Dashboard de indicadores (KPIs) criado com IA" loading="lazy" class="w-full block bg-soft" />
-        </figure>
-
-        <figure class="ex-card">
-          <img src="planilhas%20exemplos/hq720.jpg" alt="Controle de vendas de eletrônicos criado com IA" loading="lazy" class="w-full block bg-soft" />
-        </figure>
-
-        </div>
-      </div>
-
-      <script>
-        (function () {
-          var vp = document.getElementById("ex-viewport");
-          var t = document.getElementById("ex-track");
-          if (!vp || !t) return;
-
-          t.innerHTML += t.innerHTML; // duplica para loop infinito nos dois sentidos
-
-          var half = 0;
-          function measure(){ half = t.scrollWidth / 2; }
-          measure();
-          window.addEventListener("load", measure);
-          window.addEventListener("resize", measure);
-          if (window.ResizeObserver) new ResizeObserver(measure).observe(t);
-
-          // loop infinito ao rolar/arrastar
-          vp.addEventListener("scroll", function () {
-            if (!half) return;
-            if (vp.scrollLeft >= half) vp.scrollLeft -= half;
-            else if (vp.scrollLeft <= 0) vp.scrollLeft += half;
-          });
-
-          // arrastar com o mouse
-          var dragging = false, startX = 0, startScroll = 0, paused = false, rT;
-          function resumeSoon(){ clearTimeout(rT); rT = setTimeout(function () { paused = false; }, 1400); }
-          vp.addEventListener("mousedown", function (e) {
-            dragging = true; paused = true;
-            startX = e.pageX; startScroll = vp.scrollLeft;
-            vp.classList.add("dragging"); e.preventDefault();
-          });
-          window.addEventListener("mousemove", function (e) {
-            if (!dragging) return;
-            vp.scrollLeft = startScroll - (e.pageX - startX);
-          });
-          window.addEventListener("mouseup", function () {
-            if (!dragging) return;
-            dragging = false; vp.classList.remove("dragging"); resumeSoon();
-          });
-
-          // pausa ao interagir (hover / toque)
-          vp.addEventListener("mouseenter", function () { paused = true; });
-          vp.addEventListener("mouseleave", function () { if (!dragging) resumeSoon(); });
-          vp.addEventListener("touchstart", function () { paused = true; }, { passive: true });
-          vp.addEventListener("touchend", function () { resumeSoon(); }, { passive: true });
-
-          // rolagem automática suave (o dedo/mouse continua funcionando por cima)
-          var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-          function tick() {
-            if (!reduce && !paused && !dragging && half) {
-              vp.scrollLeft += 0.8;
-              if (vp.scrollLeft >= half) vp.scrollLeft -= half;
-            }
-            requestAnimationFrame(tick);
-          }
-          requestAnimationFrame(tick);
-        })();
-      </script>
-
-      <p class="mt-8 text-center text-sm font-medium text-black/50">São apenas alguns exemplos, com o <strong class="text-black/70">Método CRIE</strong> você monta qualquer painel sob demanda.</p>
     </div>
   </section>
 
