@@ -56,6 +56,13 @@
     /* Cards de comentário (estilo print de Facebook / Instagram) */
     .cmt-grid { display:grid; gap:1.25rem; }
     @media (min-width:640px){ .cmt-grid { grid-template-columns:1fr 1fr; } }
+    /* Carrossel de comentários (auto + arrastar) */
+    .cmt-vp { overflow-x:auto; overflow-y:hidden; cursor:grab; scrollbar-width:none; -webkit-overflow-scrolling:touch; padding-bottom:6px; }
+    .cmt-vp::-webkit-scrollbar { display:none; }
+    .cmt-vp.dragging { cursor:grabbing; }
+    .cmt-trk { display:flex; align-items:flex-start; width:max-content; }
+    .cmt-trk .cmt-card { flex:0 0 auto; width:330px; margin-right:1rem; transform:none; }
+    @media (max-width:640px){ .cmt-trk .cmt-card { width:280px; } }
     .cmt-card { background:#fff; border:2px solid #000; border-radius:1rem; box-shadow:4px 4px 0 0 #000; padding:1rem 1.1rem; transition:transform .2s ease; }
     .cmt-card:hover { transform:rotate(0) !important; }
     .rot-l { transform:rotate(-1.5deg); } .rot-r { transform:rotate(1.4deg); }
@@ -85,6 +92,9 @@
     .ex-track { display: flex; width: max-content; }
     .ex-card { flex: 0 0 auto; width: 600px; max-width: 88vw; margin-right: 1.5rem; border-radius: .75rem; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.16); }
     @media (max-width: 640px){ .ex-card { width: 340px; } }
+
+    /* No celular, oculta a última linha do dashboard simulado (ocupa menos espaço) */
+    @media (max-width: 640px){ .sim-hide-mobile { display: none; } }
 
     @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .btn-press,.cta-pulse{ transition:none; animation:none; } }
   </style>
@@ -267,8 +277,8 @@
                 <div id="sim-cols-labels" class="mt-1 flex gap-1.5 text-[9px] font-bold text-black/40"></div>
               </div>
             </div>
-            <!-- linha 3: tendência + ranking -->
-            <div class="mt-3 grid sm:grid-cols-2 gap-3">
+            <!-- linha 3: tendência + ranking (oculta no celular) -->
+            <div class="mt-3 grid sm:grid-cols-2 gap-3 sim-hide-mobile">
               <div class="bg-white border-2 border-black rounded-xl shadow-hard-sm p-3">
                 <p class="text-[11px] font-bold text-black/50 mb-2">TENDÊNCIA DE RECEITA</p>
                 <svg id="sim-line" viewBox="0 0 220 92" class="w-full h-28"></svg>
@@ -727,7 +737,8 @@
       </div>
       <p class="mt-3 text-center font-medium text-black/70">O que estão comentando nas nossas redes 👇</p>
 
-      <div class="cmt-grid mt-12 max-w-3xl mx-auto">
+      <div id="cmt-viewport" class="cmt-vp mt-12">
+        <div id="cmt-track" class="cmt-trk">
 
         <!-- Facebook -->
         <div class="cmt-card rot-l">
@@ -804,7 +815,49 @@
           </div>
         </div>
 
+        </div>
       </div>
+
+      <script>
+        (function () {
+          var vp = document.getElementById("cmt-viewport");
+          var t = document.getElementById("cmt-track");
+          if (!vp || !t) return;
+          t.innerHTML += t.innerHTML; // duplica para loop contínuo
+          var half = 0;
+          function measure(){ half = t.scrollWidth / 2; }
+          measure();
+          window.addEventListener("load", measure);
+          window.addEventListener("resize", measure);
+          if (window.ResizeObserver) new ResizeObserver(measure).observe(t);
+          vp.addEventListener("scroll", function () {
+            if (!half) return;
+            if (vp.scrollLeft >= half) vp.scrollLeft -= half;
+            else if (vp.scrollLeft <= 0) vp.scrollLeft += half;
+          });
+          var dragging = false, startX = 0, startScroll = 0, paused = false, rT;
+          function resumeSoon(){ clearTimeout(rT); rT = setTimeout(function () { paused = false; }, 1400); }
+          vp.addEventListener("mousedown", function (e) {
+            dragging = true; paused = true; startX = e.pageX; startScroll = vp.scrollLeft;
+            vp.classList.add("dragging"); e.preventDefault();
+          });
+          window.addEventListener("mousemove", function (e) { if (dragging) vp.scrollLeft = startScroll - (e.pageX - startX); });
+          window.addEventListener("mouseup", function () { if (dragging) { dragging = false; vp.classList.remove("dragging"); resumeSoon(); } });
+          vp.addEventListener("mouseenter", function () { paused = true; });
+          vp.addEventListener("mouseleave", function () { if (!dragging) resumeSoon(); });
+          vp.addEventListener("touchstart", function () { paused = true; }, { passive: true });
+          vp.addEventListener("touchend", function () { resumeSoon(); }, { passive: true });
+          var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          function tick() {
+            if (!reduce && !paused && !dragging && half) {
+              vp.scrollLeft += 0.6;
+              if (vp.scrollLeft >= half) vp.scrollLeft -= half;
+            }
+            requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        })();
+      </script>
       <!-- TODO: trocar os comentários de exemplo acima por prints reais do Instagram/Facebook -->
     </div>
   </section>
