@@ -957,7 +957,6 @@
     <div class="relative mx-auto max-w-3xl px-4 sm:px-6 py-20 text-center">
       <h2 class="font-heading font-extrabold tracking-tighter text-4xl sm:text-5xl leading-[0.95]">Você tem 2 caminhos.</h2>
       <p class="mt-6 max-w-xl mx-auto text-lg font-medium text-black/80">Continuar perdendo tempo travado no Excel do jeito antigo… ou aprender hoje a fazer a IA trabalhar por você — por menos do que uma pizza.</p>
-      <p class="mt-4 font-bold">⏳ Preço de lançamento acaba em <span id="countdown2" class="text-black bg-white px-2 border-2 border-black rounded tabular-nums">--:--:--</span></p>
       <a href="#planos" class="cta-pulse btn-press mt-8 inline-flex items-center justify-center gap-2 bg-brand-green text-white font-bold text-lg sm:text-xl px-8 py-5 border-2 border-black rounded-xl shadow-hard">
         QUERO CRIAR MINHAS PLANILHAS COM IA AGORA
         <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -1000,24 +999,6 @@
   </div>
 
   <script>
-    // ---- Countdown ----
-    (function () {
-      // Data/hora REAL de término da oferta — AJUSTE AQUI.
-      // new Date(ano, mês-1, dia, hora, min). Ex.: 30/06/2026 23:59 = new Date(2026, 5, 30, 23, 59)
-      const end = new Date(2026, 5, 30, 23, 59).getTime();
-      const els = [document.getElementById("countdown"), document.getElementById("countdown2")];
-      const pad = (n) => String(n).padStart(2, "0");
-      function tick() {
-        let diff = Math.max(0, end - Date.now());
-        const h = Math.floor(diff / 3600000);
-        const m = Math.floor((diff % 3600000) / 60000);
-        const s = Math.floor((diff % 60000) / 1000);
-        const txt = pad(h) + ":" + pad(m) + ":" + pad(s);
-        els.forEach((e) => { if (e) e.textContent = txt; });
-      }
-      tick(); setInterval(tick, 1000);
-    })();
-
     // ---- Purchase notifications ----
     (function () {
       const nomes = [
