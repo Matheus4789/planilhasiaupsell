@@ -19,6 +19,7 @@
 
   <style>
     :root { color-scheme: light; }
+    html { scroll-behavior: smooth; scroll-padding-top: 64px; }
     body { font-family: "Satoshi", sans-serif; font-weight: 500; }
     h1,h2,h3,h4,.font-heading { font-family: "Cabinet Grotesk", sans-serif; }
 
@@ -85,7 +86,7 @@
     .ex-card { flex: 0 0 auto; width: 600px; max-width: 88vw; margin-right: 1.5rem; border-radius: .75rem; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.16); }
     @media (max-width: 640px){ .ex-card { width: 340px; } }
 
-    @media (prefers-reduced-motion: reduce){ .btn-press,.cta-pulse{ transition:none; animation:none; } }
+    @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .btn-press,.cta-pulse{ transition:none; animation:none; } }
   </style>
 </head>
 
