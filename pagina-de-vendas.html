@@ -180,15 +180,36 @@
         Crie <span class="text-stroke">qualquer planilha</span> ou dashboard profissional em minutos, conversando com a Inteligência Artificial
       </h1>
 
-      <!-- Vídeo principal do hero (mini VSL) -->
+      <!-- Vídeo principal do hero (mini VSL, autoplay mudo + clique p/ som) -->
       <div class="mt-9 max-w-3xl mx-auto">
         <div class="relative bg-black border-2 border-black rounded-2xl shadow-hard-lg overflow-hidden">
-          <video class="w-full block" controls playsinline preload="metadata" poster="imagens/hero-planilha-ia.png">
+          <video id="vsl" class="w-full block" autoplay muted loop playsinline preload="auto" poster="imagens/hero-planilha-ia.png">
             <source src="imagens/planilhasminivsl.mp4" type="video/mp4" />
             Seu navegador não suporta vídeo. <a href="imagens/planilhasminivsl.mp4">Baixe aqui</a>.
           </video>
+          <button id="vsl-unmute" type="button" aria-label="Ativar som" class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/30 text-white cursor-pointer">
+            <span class="grid place-items-center w-14 h-14 bg-brand-green border-2 border-black rounded-full shadow-hard-sm">
+              <svg viewBox="0 0 24 24" class="w-7 h-7" fill="#fff"><path d="M3 10v4h4l5 5V5L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1c2.9.9 5 3.6 5 6.7s-2.1 5.8-5 6.7v2.1c4-1 7-4.6 7-8.8s-3-7.8-7-8.8z"/></svg>
+            </span>
+            <span class="font-bold text-sm border-2 border-black rounded-full px-3 py-1" style="background:rgba(0,0,0,.65)">🔊 Clique para ativar o som</span>
+          </button>
         </div>
       </div>
+      <script>
+        (function(){
+          var v=document.getElementById('vsl'), b=document.getElementById('vsl-unmute');
+          if(!v||!b) return;
+          function ativarSom(){
+            v.muted=false; v.loop=false;
+            try{ v.currentTime=0; }catch(e){}
+            v.controls=true;
+            var p=v.play(); if(p&&p.catch) p.catch(function(){});
+            b.style.display='none';
+          }
+          b.addEventListener('click', ativarSom);
+          var ap=v.play(); if(ap&&ap.catch) ap.catch(function(){});  // tenta o autoplay mudo
+        })();
+      </script>
 
       <p class="mt-6 max-w-2xl mx-auto text-lg sm:text-xl font-medium text-black/80">
         Use a IA como seu <strong>especialista particular de planilhas</strong>, sem decorar fórmula e <strong>mesmo que você odeie Excel</strong>.
