@@ -151,7 +151,18 @@
     .offer-btn-primary:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 0 #000;}
     .offer-note{margin-top:12px;text-align:center;font-size:11px;font-weight:700;color:rgba(255,255,255,.55);}
 
-    @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .btn-press,.cta-pulse{ transition:none; animation:none; } }
+    /* Barra fixa de CTA (sticky no rodapé) */
+    .sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:900;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;padding-bottom:calc(10px + env(safe-area-inset-bottom));background:#0E4D32;border-top:2px solid #000;text-decoration:none;transform:translateY(120%);transition:transform .3s cubic-bezier(.2,.8,.2,1);}
+    .sticky-cta.show{transform:translateY(0);}
+    .sticky-cta-price{display:flex;flex-direction:column;line-height:1.05;flex-shrink:0;}
+    .sticky-cta-price .sc-from{font-size:10px;font-weight:700;color:rgba(255,255,255,.55);}
+    .sticky-cta-price .sc-val{font-family:'Poppins',sans-serif;font-weight:800;font-size:22px;color:#6FE3A4;letter-spacing:-.02em;}
+    .sticky-cta-btn{flex-shrink:0;display:inline-flex;align-items:center;gap:8px;background:#6FE3A4;color:#000;font-family:'Poppins',sans-serif;font-weight:800;font-size:15px;border:2px solid #000;border-radius:12px;padding:12px 22px;box-shadow:4px 4px 0 0 #000;transition:transform .15s,box-shadow .15s;}
+    .sticky-cta:hover .sticky-cta-btn{transform:translate(2px,2px);box-shadow:2px 2px 0 0 #000;}
+    @media (min-width:640px){ .sticky-cta{justify-content:center;gap:28px;} }
+    @media (max-width:380px){ .sticky-cta-btn{padding:11px 16px;font-size:14px;} .sticky-cta-price .sc-val{font-size:20px;} }
+
+    @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .btn-press,.cta-pulse{ transition:none; animation:none; } .sticky-cta{ transition:none; } }
   </style>
 </head>
 
@@ -221,15 +232,18 @@
         <p class="text-xs font-bold text-black/50">TUDO QUE VOCÊ LEVA</p>
         <div class="mt-3 flex flex-wrap gap-2">
           <span class="bg-brand-mint border-2 border-black rounded-full px-3 py-1 text-sm font-bold">Curso completo</span>
-          <span class="bg-brand-mint border-2 border-black rounded-full px-3 py-1 text-sm font-bold">+7 bônus</span>
-          <span class="bg-brand-mint border-2 border-black rounded-full px-3 py-1 text-sm font-bold">100+ prompts</span>
+          <span class="bg-brand-mint border-2 border-black rounded-full px-3 py-1 text-sm font-bold">18 videoaulas</span>
+          <span class="bg-brand-mint border-2 border-black rounded-full px-3 py-1 text-sm font-bold">Método CRIE</span>
           <span class="bg-brand-mint border-2 border-black rounded-full px-3 py-1 text-sm font-bold">Acesso vitalício</span>
           <span class="bg-brand-mint border-2 border-black rounded-full px-3 py-1 text-sm font-bold">Garantia 7 dias</span>
         </div>
         <div class="mt-5 flex items-center justify-between gap-3">
-          <div class="flex items-end gap-2">
-            <span class="text-sm font-bold text-black/40 line-through">R$ 97</span>
-            <span class="font-heading font-extrabold text-4xl tracking-tighter text-brand-green">R$ 9,90</span>
+          <div>
+            <p class="text-xs font-bold text-black/50">a partir de</p>
+            <div class="flex items-end gap-2">
+              <span class="text-sm font-bold text-black/40 line-through">R$ 97</span>
+              <span class="font-heading font-extrabold text-4xl tracking-tighter text-brand-green">R$ 9,90</span>
+            </div>
           </div>
           <span class="bg-brand-lime text-black text-sm font-bold px-3 py-1 border-2 border-black rounded-full rotate-3">90% OFF</span>
         </div>
@@ -871,44 +885,59 @@
     <div class="relative mx-auto max-w-5xl px-4 sm:px-6">
       <div class="text-center max-w-2xl mx-auto">
         <h2 class="font-heading font-extrabold tracking-tighter text-3xl sm:text-4xl">Garanta seu acesso hoje</h2>
-        <p class="mt-3 font-medium text-black/80">Curso + todos os bônus num único plano. Acesso vitalício, pagamento único.</p>
+        <p class="mt-3 font-medium text-black/80">Escolha o plano ideal pra você. Acesso vitalício e pagamento único nos dois.</p>
       </div>
 
-      <div class="mt-12 mx-auto" style="max-width:30rem">
-        <div class="relative bg-brand-deep text-white border-2 border-black rounded-2xl shadow-hard p-8">
-          <span class="absolute -top-3 right-6 bg-brand-lime text-black text-xs font-bold px-3 py-1 border-2 border-black rounded-full rotate-3">⭐ ACESSO COMPLETO</span>
-          <h3 class="font-heading font-extrabold text-2xl tracking-tight text-white">Acesso Completo</h3>
-          <p class="mt-1 font-medium text-white/60">Curso + todos os bônus. Plano único, sem pegadinha.</p>
-          <div class="mt-6 flex items-end gap-2">
-            <span class="font-heading font-extrabold text-6xl tracking-tighter text-brand-lime">R$ 9,90</span>
-            <span class="mb-2 font-bold text-white/50 line-through">R$ 97</span>
-          </div>
-          <p class="mt-1 text-sm font-bold text-white/70">Pagamento único · acesso vitalício</p>
-          <ul class="mt-6 space-y-3 font-medium">
-            <li class="flex items-center gap-2"><span class="text-brand-lime font-bold">✓</span> Curso completo (Módulos 0–6)</li>
-            <li class="flex items-center gap-2"><span class="text-brand-lime font-bold">✓</span> 18 videoaulas práticas (ferramenta por ferramenta)</li>
-            <li class="flex items-center gap-2"><span class="text-brand-lime font-bold">✓</span> Método CRIE, crie qualquer planilha com IA</li>
-            <li class="flex items-center gap-2"><span class="text-brand-lime font-bold">✓</span> Acesso vitalício a tudo</li>
-          </ul>
+      <div class="mt-12 grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
 
-          <div style="margin-top:1.25rem;padding-top:1.25rem;border-top:2px solid rgba(255,255,255,.15)">
-            <p class="text-sm font-extrabold text-brand-lime">🎁 Bônus inclusos</p>
-            <ul class="text-sm font-medium" style="display:flex;flex-direction:column;gap:.5rem;margin-top:.75rem">
-              <li class="flex items-start gap-2"><span class="text-brand-lime font-bold shrink-0">+</span><span>Biblioteca de +100 prompts prontos</span></li>
-              <li class="flex items-start gap-2"><span class="text-brand-lime font-bold shrink-0">+</span><span>Pack de 50 planilhas e dashboards</span></li>
-              <li class="flex items-start gap-2"><span class="text-brand-lime font-bold shrink-0">+</span><span>Mini-curso de Excel &amp; Sheets do zero</span></li>
-              <li class="flex items-start gap-2"><span class="text-brand-lime font-bold shrink-0">+</span><span>Templates de dashboard editáveis</span></li>
-              <li class="flex items-start gap-2"><span class="text-brand-lime font-bold shrink-0">+</span><span>Guia &quot;Sua 1ª renda extra&quot;</span></li>
-              <li class="flex items-start gap-2"><span class="text-brand-lime font-bold shrink-0">+</span><span>Comunidade exclusiva</span></li>
-              <li class="flex items-start gap-2"><span class="text-brand-lime font-bold shrink-0">+</span><span>Atualizações vitalícias dos prompts</span></li>
-            </ul>
+        <!-- ===== PLANO ESSENCIAL ===== -->
+        <div class="bg-white border-2 border-black rounded-2xl shadow-hard p-8 flex flex-col h-full">
+          <h3 class="font-heading font-extrabold text-2xl tracking-tight">Essencial</h3>
+          <p class="mt-1 font-medium text-black/60">O curso completo pra você começar hoje.</p>
+          <div class="mt-6 flex items-end gap-2">
+            <span class="font-heading font-extrabold text-5xl tracking-tighter text-brand-green">R$ 9,90</span>
+            <span class="mb-2 font-bold text-black/40 line-through">R$ 97</span>
           </div>
-          <a href="#" onclick="openOfferModal();return false;" class="cta-pulse btn-press mt-8 inline-flex w-full items-center justify-center gap-2 bg-brand-lime text-black font-bold text-lg px-6 py-4 border-2 border-black rounded-xl shadow-hard-sm">
-            QUERO ACESSAR POR R$ 9,90
+          <p class="mt-1 text-sm font-bold text-black/60">Pagamento único · acesso vitalício</p>
+          <ul class="mt-6 space-y-3 font-medium flex-1">
+            <li class="flex items-start gap-2"><span class="text-brand-green font-bold shrink-0">✓</span> Curso completo (Módulos 0–6)</li>
+            <li class="flex items-start gap-2"><span class="text-brand-green font-bold shrink-0">✓</span> 18 videoaulas práticas (ferramenta por ferramenta)</li>
+            <li class="flex items-start gap-2"><span class="text-brand-green font-bold shrink-0">✓</span> Método CRIE, crie qualquer planilha com IA</li>
+            <li class="flex items-start gap-2"><span class="text-brand-green font-bold shrink-0">✓</span> Acesso vitalício a tudo</li>
+          </ul>
+          <a href="#" onclick="goCheckout('essencial');return false;" class="btn-press mt-8 inline-flex w-full items-center justify-center gap-2 bg-brand-green text-white font-bold text-lg px-6 py-4 border-2 border-black rounded-xl shadow-hard-sm">
+            QUERO O ESSENCIAL · R$ 9,90
             <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
-          <p class="mt-3 text-center text-xs font-bold text-white/60">🔒 Compra segura · Acesso imediato · Pix, cartão ou boleto</p>
+          <p class="mt-3 text-center text-xs font-bold text-black/60">🔒 Compra segura · Acesso imediato</p>
         </div>
+
+        <!-- ===== PLANO COMPLETO (destaque) ===== -->
+        <div class="relative bg-brand-deep text-white border-2 border-black rounded-2xl shadow-hard p-8 flex flex-col h-full">
+          <span class="absolute -top-3 right-6 bg-brand-lime text-black text-xs font-bold px-3 py-1 border-2 border-black rounded-full rotate-3">⭐ MAIS ESCOLHIDO</span>
+          <h3 class="font-heading font-extrabold text-2xl tracking-tight text-white">Completo + Bônus</h3>
+          <p class="mt-1 font-medium text-white/60">Tudo do Essencial e mais 7 bônus. Só R$ 10 a mais.</p>
+          <div class="mt-6 flex items-end gap-2">
+            <span class="font-heading font-extrabold text-5xl tracking-tighter text-brand-lime">R$ 19,90</span>
+            <span class="mb-2 font-bold text-white/50 line-through">R$ 197</span>
+          </div>
+          <p class="mt-1 text-sm font-bold text-white/70">Pagamento único · acesso vitalício</p>
+          <ul class="mt-6 space-y-2.5 font-medium flex-1">
+            <li class="flex items-start gap-2"><span class="text-brand-lime font-bold shrink-0">✓</span> Tudo do plano Essencial</li>
+            <li class="flex items-start gap-2"><span class="shrink-0">🎁</span> Biblioteca de +100 prompts prontos</li>
+            <li class="flex items-start gap-2"><span class="shrink-0">🎁</span> Pack de 50 planilhas e dashboards</li>
+            <li class="flex items-start gap-2"><span class="shrink-0">🎁</span> Mini-curso de Excel &amp; Sheets do zero</li>
+            <li class="flex items-start gap-2"><span class="shrink-0">🎁</span> Templates de dashboard editáveis</li>
+            <li class="flex items-start gap-2"><span class="shrink-0">🎁</span> Guia &quot;Sua 1ª renda extra&quot;</li>
+            <li class="flex items-start gap-2"><span class="shrink-0">🎁</span> Comunidade + atualizações vitalícias</li>
+          </ul>
+          <a href="#" onclick="goCheckout('complete');return false;" class="cta-pulse btn-press mt-8 inline-flex w-full items-center justify-center gap-2 bg-brand-lime text-black font-bold text-lg px-6 py-4 border-2 border-black rounded-xl shadow-hard-sm">
+            QUERO O COMPLETO · R$ 19,90
+            <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <p class="mt-3 text-center text-xs font-bold text-white/60">🔒 Compra segura · Acesso imediato · 7 dias de garantia</p>
+        </div>
+
       </div>
 
     </div>
@@ -966,7 +995,7 @@
     <div class="relative mx-auto max-w-3xl px-4 sm:px-6 py-20 text-center">
       <h2 class="font-heading font-extrabold tracking-tighter text-4xl sm:text-5xl leading-[0.95]">Você tem 2 caminhos.</h2>
       <p class="mt-6 max-w-xl mx-auto text-lg font-medium text-black/80">Continuar perdendo tempo travado no Excel do jeito antigo… ou aprender hoje a fazer a IA trabalhar por você, por menos do que uma pizza.</p>
-      <a href="#" onclick="openOfferModal();return false;" class="cta-pulse btn-press mt-8 inline-flex items-center justify-center gap-2 bg-brand-green text-white font-bold text-lg sm:text-xl px-8 py-5 border-2 border-black rounded-xl shadow-hard">
+      <a href="#planos" class="cta-pulse btn-press mt-8 inline-flex items-center justify-center gap-2 bg-brand-green text-white font-bold text-lg sm:text-xl px-8 py-5 border-2 border-black rounded-xl shadow-hard">
         QUERO CRIAR MINHAS PLANILHAS COM IA AGORA
         <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
@@ -994,80 +1023,48 @@
     </div>
   </footer>
 
-  <!-- POPUP DE OFERTA (abre no clique do CTA principal) -->
-  <div class="offer-modal" id="offerModal" onclick="if(event.target===this)closeOfferModal()">
-    <div class="offer-card" role="dialog" aria-modal="true" aria-label="Escolha sua oferta">
-      <button class="offer-close" type="button" aria-label="Fechar" onclick="closeOfferModal()">×</button>
-      <h3 class="offer-title">Leve a versão <em>completa</em> com os bônus</h3>
-      <p class="offer-sub">Escolha o seu plano:</p>
-
-      <div class="offer-tier" data-plan="essencial" role="radio" aria-checked="false" tabindex="0" onclick="selectPlan('essencial')">
-        <div class="offer-tier-head">
-          <span class="offer-radio"></span>
-          <span class="offer-tier-name">Essencial</span>
-          <span class="offer-tier-price">R$ 9,90</span>
-        </div>
-        <ul class="offer-list">
-          <li>Curso completo (Módulos 0 a 6)</li>
-          <li>18 videoaulas práticas</li>
-          <li>Método CRIE</li>
-          <li>Acesso vitalício</li>
-        </ul>
-      </div>
-
-      <div class="offer-tier complete" data-plan="complete" role="radio" aria-checked="true" tabindex="0" onclick="selectPlan('complete')">
-        <span class="offer-tier-tag">Mais escolhido · só R$ 10 a mais</span>
-        <div class="offer-tier-head">
-          <span class="offer-radio"></span>
-          <span class="offer-tier-name">Completo + Bônus</span>
-          <span class="offer-tier-price">R$ 19,90</span>
-        </div>
-        <ul class="offer-list">
-          <li>Tudo do Essencial, e ainda os 7 bônus:</li>
-          <li class="bonus">Biblioteca de +100 prompts prontos</li>
-          <li class="bonus">Pack de 50 planilhas e dashboards</li>
-          <li class="bonus">Mini-curso de Excel &amp; Sheets do zero</li>
-          <li class="bonus">Templates de dashboard editáveis</li>
-          <li class="bonus">Guia "Sua 1ª renda extra"</li>
-          <li class="bonus">Comunidade + atualizações vitalícias</li>
-        </ul>
-      </div>
-
-      <button type="button" id="offerContinueBtn" class="offer-btn offer-btn-primary" onclick="continueCheckout()">
-        Continuar com o plano Completo
-      </button>
-      <p class="offer-note">🔒 Pagamento único · Pix ou cartão · Garantia de 7 dias</p>
-    </div>
-  </div>
+  <!-- ===== BARRA FIXA DE CTA (rola até os planos; some na seção de planos/CTA final/footer) ===== -->
+  <a id="sticky-cta" href="#planos" class="sticky-cta" aria-label="Ver os planos">
+    <span class="sticky-cta-price">
+      <span class="sc-from">a partir de</span>
+      <span class="sc-val">R$ 9,90</span>
+    </span>
+    <span class="sticky-cta-btn">
+      Quero acessar
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </span>
+  </a>
+  <script>
+    (function(){
+      var bar=document.getElementById('sticky-cta');
+      if(!bar || !('IntersectionObserver' in window)) return;
+      var hero=document.querySelector('header');
+      var zones=['planos','cta-final'].map(function(id){return document.getElementById(id);}).filter(Boolean);
+      var footer=document.querySelector('footer'); if(footer) zones.push(footer);
+      var pastHero=!hero, visible=new Set();
+      function update(){ bar.classList.toggle('show', pastHero && visible.size===0); }
+      if(hero){ new IntersectionObserver(function(e){ pastHero=!e[0].isIntersecting; update(); },{threshold:0}).observe(hero); }
+      var io=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting) visible.add(en.target); else visible.delete(en.target); }); update(); },{threshold:0.01});
+      zones.forEach(function(z){ io.observe(z); });
+      update();
+    })();
+  </script>
 
   <script>
-    // Configure os DOIS links de checkout (cada um com o preço certo):
+    // Links de checkout (cada plano com seu preço):
     var CHECKOUT_COMPLETO = 'https://pay.wiapy.com/7pT_6kY88VJ';
     var CHECKOUT_ESSENCIAL = 'https://pay.wiapy.com/q9obkFG5bE_';
-    var selectedPlan = 'complete';
-    function selectPlan(plan){
-      selectedPlan = plan;
-      document.querySelectorAll('.offer-tier').forEach(function(t){
-        var on = t.getAttribute('data-plan') === plan;
-        t.classList.toggle('selected', on);
-        t.setAttribute('aria-checked', on ? 'true' : 'false');
-      });
-      var btn = document.getElementById('offerContinueBtn');
-      if (btn) btn.textContent = (plan === 'complete' ? 'Continuar com o plano Completo' : 'Continuar com o plano Essencial');
-    }
-    function openOfferModal(){ selectPlan('complete'); document.getElementById('offerModal').classList.add('open'); document.body.style.overflow='hidden'; }
-    function closeOfferModal(){ document.getElementById('offerModal').classList.remove('open'); document.body.style.overflow=''; }
     function withUtms(url){ var qs = window.location.search; if(!qs || qs.length<2) return url; return url + (url.indexOf('?')===-1?'?':'&') + qs.substring(1); }
-    function continueCheckout(){
-      var url = (selectedPlan === 'complete') ? CHECKOUT_COMPLETO : CHECKOUT_ESSENCIAL;
-      if (window.fbq) fbq('track','InitiateCheckout',{value:(selectedPlan==='complete'?19.90:9.90),currency:'BRL'});
+    function goCheckout(plan){
+      var complete = (plan === 'complete');
+      var url = complete ? CHECKOUT_COMPLETO : CHECKOUT_ESSENCIAL;
+      if (window.fbq) fbq('track','InitiateCheckout',{value:(complete?19.90:9.90),currency:'BRL'});
       window.location.href = withUtms(url);
     }
-    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeOfferModal(); });
   </script>
 
   <!-- ============ PURCHASE NOTIFICATION TOAST ============ -->
-  <div id="toast" class="fixed bottom-4 left-4 z-50 hidden max-w-xs bg-white border-2 border-black rounded-xl shadow-hard-sm p-3">
+  <div id="toast" class="fixed left-4 hidden max-w-xs bg-white border-2 border-black rounded-xl shadow-hard-sm p-3" style="bottom:84px;z-index:950">
     <div class="flex items-center gap-3">
       <span class="grid place-items-center w-10 h-10 bg-brand-green border-2 border-black rounded-lg shrink-0">
         <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>
