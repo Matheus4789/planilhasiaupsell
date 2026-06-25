@@ -114,8 +114,8 @@
     .ex-viewport.dragging { cursor: grabbing; }
     .ex-viewport.dragging img { pointer-events: none; }
     .ex-track { display: flex; width: max-content; }
-    .ex-card { flex: 0 0 auto; width: 600px; max-width: 88vw; margin-right: 1.5rem; border-radius: .75rem; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.16); }
-    @media (max-width: 640px){ .ex-card { width: 340px; } }
+    .ex-card { flex: 0 0 auto; width: 840px; max-width: 94vw; margin-right: 1.75rem; border-radius: .9rem; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,.2); }
+    @media (max-width: 640px){ .ex-card { width: 420px; } }
 
     /* No celular, oculta a última linha do dashboard simulado (ocupa menos espaço) */
     @media (max-width: 640px){ .sim-hide-mobile { display: none; } }
@@ -191,34 +191,64 @@
         Crie <span class="text-stroke">qualquer planilha</span> ou dashboard profissional em minutos, conversando com a Inteligência Artificial
       </h1>
 
-      <!-- Vídeo principal do hero (mini VSL, autoplay mudo + clique p/ som) -->
-      <div class="mt-9 max-w-3xl mx-auto">
-        <div class="relative bg-black border-2 border-black rounded-2xl shadow-hard-lg overflow-hidden">
-          <video id="vsl" class="w-full block" autoplay muted loop playsinline preload="auto" poster="imagens/hero-planilha-ia.jpg">
-            <source src="imagens/planilhasminivsl.mp4" type="video/mp4" />
-            Seu navegador não suporta vídeo. <a href="imagens/planilhasminivsl.mp4">Baixe aqui</a>.
-          </video>
-          <button id="vsl-unmute" type="button" aria-label="Ativar som" class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/30 text-white cursor-pointer">
-            <span class="grid place-items-center w-14 h-14 bg-brand-green border-2 border-black rounded-full shadow-hard-sm">
-              <svg viewBox="0 0 24 24" class="w-7 h-7" fill="#fff"><path d="M3 10v4h4l5 5V5L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1c2.9.9 5 3.6 5 6.7s-2.1 5.8-5 6.7v2.1c4-1 7-4.6 7-8.8s-3-7.8-7-8.8z"/></svg>
-            </span>
-            <span class="font-bold text-sm border-2 border-black rounded-full px-3 py-1" style="background:rgba(0,0,0,.65)">🔊 Clique para ativar o som</span>
-          </button>
+      <!-- Planilhas de exemplo (carrossel) no lugar do vídeo -->
+      <div id="ex-viewport" class="mt-9 ex-viewport">
+        <div id="ex-track" class="ex-track">
+          <figure class="ex-card"><img src="planilhas%20exemplos/dashvendas.jpg" alt="Dashboard de vendas criado com IA" loading="lazy" class="w-full block bg-soft" /></figure>
+          <figure class="ex-card"><img src="planilhas%20exemplos/1_vMTpFA_OLXgFI3Gih77sxg.jpg" alt="Relatório de vendas em Power BI criado com IA" loading="lazy" class="w-full block bg-soft" /></figure>
+          <figure class="ex-card"><img src="planilhas%20exemplos/1674241624815.jpeg" alt="Painel financeiro de investimentos e gastos criado com IA" loading="lazy" class="w-full block bg-soft" /></figure>
+          <figure class="ex-card"><img src="planilhas%20exemplos/2020-03-24-16_52_41-Dashboard-SAC-Dark-Power-BI-Desktop-1024x575.jpg" alt="Dashboard de atendimento (SAC) criado com IA" loading="lazy" class="w-full block bg-soft" /></figure>
+          <figure class="ex-card"><img src="planilhas%20exemplos/260120221643174101cursodepowerbiparaempresas.jpg" alt="Painel gerencial empresarial criado com IA" loading="lazy" class="w-full block bg-soft" /></figure>
+          <figure class="ex-card"><img src="planilhas%20exemplos/DASHBOARD-1-1024x575.jpg" alt="Dashboard de indicadores (KPIs) criado com IA" loading="lazy" class="w-full block bg-soft" /></figure>
+          <figure class="ex-card"><img src="planilhas%20exemplos/hq720.jpg" alt="Controle de vendas de eletrônicos criado com IA" loading="lazy" class="w-full block bg-soft" /></figure>
         </div>
       </div>
+      <p class="mt-4 text-sm font-medium text-black/50">Exemplos reais criados conversando com a IA. Arraste para o lado.</p>
       <script>
-        (function(){
-          var v=document.getElementById('vsl'), b=document.getElementById('vsl-unmute');
-          if(!v||!b) return;
-          function ativarSom(){
-            v.muted=false; v.loop=false;
-            try{ v.currentTime=0; }catch(e){}
-            v.controls=true;
-            var p=v.play(); if(p&&p.catch) p.catch(function(){});
-            b.style.display='none';
+        (function () {
+          var vp = document.getElementById("ex-viewport");
+          var t = document.getElementById("ex-track");
+          if (!vp || !t) return;
+          t.innerHTML += t.innerHTML; // duplica para loop infinito nos dois sentidos
+          var half = 0;
+          function measure(){ half = t.scrollWidth / 2; }
+          measure();
+          window.addEventListener("load", measure);
+          window.addEventListener("resize", measure);
+          if (window.ResizeObserver) new ResizeObserver(measure).observe(t);
+          vp.addEventListener("scroll", function () {
+            if (!half) return;
+            if (vp.scrollLeft >= half) vp.scrollLeft -= half;
+            else if (vp.scrollLeft <= 0) vp.scrollLeft += half;
+          });
+          var dragging = false, startX = 0, startScroll = 0, paused = false, rT;
+          function resumeSoon(){ clearTimeout(rT); rT = setTimeout(function () { paused = false; }, 1400); }
+          vp.addEventListener("mousedown", function (e) {
+            dragging = true; paused = true;
+            startX = e.pageX; startScroll = vp.scrollLeft;
+            vp.classList.add("dragging"); e.preventDefault();
+          });
+          window.addEventListener("mousemove", function (e) {
+            if (!dragging) return;
+            vp.scrollLeft = startScroll - (e.pageX - startX);
+          });
+          window.addEventListener("mouseup", function () {
+            if (!dragging) return;
+            dragging = false; vp.classList.remove("dragging"); resumeSoon();
+          });
+          vp.addEventListener("mouseenter", function () { paused = true; });
+          vp.addEventListener("mouseleave", function () { if (!dragging) resumeSoon(); });
+          vp.addEventListener("touchstart", function () { paused = true; }, { passive: true });
+          vp.addEventListener("touchend", function () { resumeSoon(); }, { passive: true });
+          var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          function tick() {
+            if (!reduce && !paused && !dragging && half) {
+              vp.scrollLeft += 0.8;
+              if (vp.scrollLeft >= half) vp.scrollLeft -= half;
+            }
+            requestAnimationFrame(tick);
           }
-          b.addEventListener('click', ativarSom);
-          var ap=v.play(); if(ap&&ap.catch) ap.catch(function(){});  // tenta o autoplay mudo
+          requestAnimationFrame(tick);
         })();
       </script>
 
@@ -264,6 +294,34 @@
   <!-- ============ PROBLEMA / PAS ============ -->
   <section class="bg-white border-b-2 border-black py-16 lg:py-24">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <!-- Vídeo (mini VSL, autoplay mudo + clique p/ som) -->
+      <div class="relative bg-black border-2 border-black rounded-2xl shadow-hard-lg overflow-hidden" style="margin-bottom:2.5rem">
+        <video id="vsl" class="w-full block" autoplay muted loop playsinline preload="auto" poster="imagens/hero-planilha-ia.jpg">
+          <source src="imagens/planilhasminivsl.mp4" type="video/mp4" />
+          Seu navegador não suporta vídeo. <a href="imagens/planilhasminivsl.mp4">Baixe aqui</a>.
+        </video>
+        <button id="vsl-unmute" type="button" aria-label="Ativar som" class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/30 text-white cursor-pointer">
+          <span class="grid place-items-center w-14 h-14 bg-brand-green border-2 border-black rounded-full shadow-hard-sm">
+            <svg viewBox="0 0 24 24" class="w-7 h-7" fill="#fff"><path d="M3 10v4h4l5 5V5L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1c2.9.9 5 3.6 5 6.7s-2.1 5.8-5 6.7v2.1c4-1 7-4.6 7-8.8s-3-7.8-7-8.8z"/></svg>
+          </span>
+          <span class="font-bold text-sm border-2 border-black rounded-full px-3 py-1" style="background:rgba(0,0,0,.65)">🔊 Clique para ativar o som</span>
+        </button>
+      </div>
+      <script>
+        (function(){
+          var v=document.getElementById('vsl'), b=document.getElementById('vsl-unmute');
+          if(!v||!b) return;
+          function ativarSom(){
+            v.muted=false; v.loop=false;
+            try{ v.currentTime=0; }catch(e){}
+            v.controls=true;
+            var p=v.play(); if(p&&p.catch) p.catch(function(){});
+            b.style.display='none';
+          }
+          b.addEventListener('click', ativarSom);
+          var ap=v.play(); if(ap&&ap.catch) ap.catch(function(){});  // tenta o autoplay mudo
+        })();
+      </script>
       <h2 class="font-heading font-extrabold tracking-tighter text-3xl sm:text-4xl">Você abre o Excel… e trava.</h2>
       <div class="mt-6 space-y-4 text-lg font-medium text-black/80 leading-relaxed">
         <p>A tela em branco, as fórmulas que parecem outra língua, o relatório que come a sua tarde. Você já tentou curso, YouTube e planilha pronta, e continuou na mesma.</p>
@@ -565,144 +623,6 @@
         obs.observe(win);
       })();
       </script>
-    </div>
-  </section>
-
-  <!-- ============ EXEMPLOS REAIS (GALERIA) ============ -->
-  <section class="bg-white border-b-2 border-black py-16 lg:py-24">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto">
-        <h2 class="mt-5 font-heading font-extrabold tracking-tighter text-3xl sm:text-4xl">Planilhas e dashboards criados com o método</h2>
-        <p class="mt-3 font-medium text-black/70">Tudo isto foi montado conversando com a IA. Você vai aprender a criar exatamente assim, do zero.</p>
-      </div>
-
-      <div id="ex-viewport" class="mt-12 ex-viewport">
-        <div id="ex-track" class="ex-track">
-
-        <figure class="ex-card">
-          <img src="planilhas%20exemplos/dashvendas.jpg" alt="Dashboard de vendas criado com IA" loading="lazy" class="w-full block bg-soft" />
-        </figure>
-
-        <figure class="ex-card">
-          <img src="planilhas%20exemplos/1_vMTpFA_OLXgFI3Gih77sxg.jpg" alt="Relatório de vendas em Power BI criado com IA" loading="lazy" class="w-full block bg-soft" />
-        </figure>
-
-        <figure class="ex-card">
-          <img src="planilhas%20exemplos/1674241624815.jpeg" alt="Painel financeiro de investimentos e gastos criado com IA" loading="lazy" class="w-full block bg-soft" />
-        </figure>
-
-        <figure class="ex-card">
-          <img src="planilhas%20exemplos/2020-03-24-16_52_41-Dashboard-SAC-Dark-Power-BI-Desktop-1024x575.jpg" alt="Dashboard de atendimento (SAC) criado com IA" loading="lazy" class="w-full block bg-soft" />
-        </figure>
-
-        <figure class="ex-card">
-          <img src="planilhas%20exemplos/260120221643174101cursodepowerbiparaempresas.jpg" alt="Painel gerencial empresarial criado com IA" loading="lazy" class="w-full block bg-soft" />
-        </figure>
-
-        <figure class="ex-card">
-          <img src="planilhas%20exemplos/DASHBOARD-1-1024x575.jpg" alt="Dashboard de indicadores (KPIs) criado com IA" loading="lazy" class="w-full block bg-soft" />
-        </figure>
-
-        <figure class="ex-card">
-          <img src="planilhas%20exemplos/hq720.jpg" alt="Controle de vendas de eletrônicos criado com IA" loading="lazy" class="w-full block bg-soft" />
-        </figure>
-
-        </div>
-      </div>
-
-      <script>
-        (function () {
-          var vp = document.getElementById("ex-viewport");
-          var t = document.getElementById("ex-track");
-          if (!vp || !t) return;
-
-          t.innerHTML += t.innerHTML; // duplica para loop infinito nos dois sentidos
-
-          var half = 0;
-          function measure(){ half = t.scrollWidth / 2; }
-          measure();
-          window.addEventListener("load", measure);
-          window.addEventListener("resize", measure);
-          if (window.ResizeObserver) new ResizeObserver(measure).observe(t);
-
-          // loop infinito ao rolar/arrastar
-          vp.addEventListener("scroll", function () {
-            if (!half) return;
-            if (vp.scrollLeft >= half) vp.scrollLeft -= half;
-            else if (vp.scrollLeft <= 0) vp.scrollLeft += half;
-          });
-
-          // arrastar com o mouse
-          var dragging = false, startX = 0, startScroll = 0, paused = false, rT;
-          function resumeSoon(){ clearTimeout(rT); rT = setTimeout(function () { paused = false; }, 1400); }
-          vp.addEventListener("mousedown", function (e) {
-            dragging = true; paused = true;
-            startX = e.pageX; startScroll = vp.scrollLeft;
-            vp.classList.add("dragging"); e.preventDefault();
-          });
-          window.addEventListener("mousemove", function (e) {
-            if (!dragging) return;
-            vp.scrollLeft = startScroll - (e.pageX - startX);
-          });
-          window.addEventListener("mouseup", function () {
-            if (!dragging) return;
-            dragging = false; vp.classList.remove("dragging"); resumeSoon();
-          });
-
-          // pausa ao interagir (hover / toque)
-          vp.addEventListener("mouseenter", function () { paused = true; });
-          vp.addEventListener("mouseleave", function () { if (!dragging) resumeSoon(); });
-          vp.addEventListener("touchstart", function () { paused = true; }, { passive: true });
-          vp.addEventListener("touchend", function () { resumeSoon(); }, { passive: true });
-
-          // rolagem automática suave (o dedo/mouse continua funcionando por cima)
-          var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-          function tick() {
-            if (!reduce && !paused && !dragging && half) {
-              vp.scrollLeft += 0.8;
-              if (vp.scrollLeft >= half) vp.scrollLeft -= half;
-            }
-            requestAnimationFrame(tick);
-          }
-          requestAnimationFrame(tick);
-        })();
-      </script>
-
-      <p class="mt-8 text-center text-sm font-medium text-black/50">São apenas alguns exemplos, com o <strong class="text-black/70">Método CRIE</strong> você monta qualquer painel sob demanda.</p>
-    </div>
-  </section>
-
-  <!-- ============ MÉTODO CRIE ============ -->
-  <section class="relative bg-brand-mint border-b-2 border-black py-16 lg:py-24 overflow-hidden">
-    <div class="absolute inset-0 grid-pattern pointer-events-none"></div>
-    <div class="relative mx-auto max-w-5xl px-4 sm:px-6">
-      <div class="text-center">
-        <h2 class="mt-5 font-heading font-extrabold tracking-tighter text-3xl sm:text-4xl">Conheça o Método <span class="text-stroke">CRIE</span></h2>
-        <p class="mt-3 max-w-2xl mx-auto font-medium text-black/80">Você nunca decora fórmula, você <strong>comanda a IA</strong>. Um processo simples de 4 passos que transforma qualquer pedido em planilha pronta.</p>
-      </div>
-
-      <div class="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white border-2 border-black rounded-2xl shadow-hard-sm p-6">
-          <span class="font-heading font-extrabold text-5xl tracking-tighter text-brand-green">C</span>
-          <h3 class="mt-2 font-heading font-extrabold text-xl">Contexto</h3>
-          <p class="mt-1 font-medium text-black/70 text-sm">Você ensina a IA quem você é e pra que serve a planilha.</p>
-        </div>
-        <div class="bg-white border-2 border-black rounded-2xl shadow-hard-sm p-6">
-          <span class="font-heading font-extrabold text-5xl tracking-tighter text-brand-green">R</span>
-          <h3 class="mt-2 font-heading font-extrabold text-xl">Requisitos</h3>
-          <p class="mt-1 font-medium text-black/70 text-sm">Descreve em português o que precisa: colunas, cálculos, visual.</p>
-        </div>
-        <div class="bg-white border-2 border-black rounded-2xl shadow-hard-sm p-6">
-          <span class="font-heading font-extrabold text-5xl tracking-tighter text-brand-green">I</span>
-          <h3 class="mt-2 font-heading font-extrabold text-xl">Iteração</h3>
-          <p class="mt-1 font-medium text-black/70 text-sm">Ajusta com 2–3 comandos até ficar perfeita.</p>
-        </div>
-        <div class="bg-white border-2 border-black rounded-2xl shadow-hard-sm p-6">
-          <span class="font-heading font-extrabold text-5xl tracking-tighter text-brand-green">E</span>
-          <h3 class="mt-2 font-heading font-extrabold text-xl">Entrega</h3>
-          <p class="mt-1 font-medium text-black/70 text-sm">Cola no Excel/Sheets e usa. Pronto.</p>
-        </div>
-      </div>
     </div>
   </section>
 
