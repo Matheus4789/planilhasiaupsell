@@ -108,12 +108,12 @@
     .ig-meta .r { font-weight:700; }
     .ig-heart { margin-left:auto; flex-shrink:0; align-self:flex-start; margin-top:.15rem; }
 
-    /* Carrossel lateral de exemplos (auto + arrastar com mouse/dedo) */
-    .ex-viewport { overflow-x: auto; overflow-y: hidden; cursor: grab; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-    .ex-viewport::-webkit-scrollbar { display: none; }
-    .ex-viewport.dragging { cursor: grabbing; }
-    .ex-viewport.dragging img { pointer-events: none; }
-    .ex-track { display: flex; width: max-content; }
+    /* Carrossel de exemplos: auto-scroll por transform (pausa ao tocar/hover) */
+    .ex-viewport { overflow: hidden; }
+    .ex-track { display: flex; width: max-content; animation: ex-marquee 38s linear infinite; will-change: transform; }
+    .ex-track.paused { animation-play-state: paused; }
+    @keyframes ex-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce){ .ex-track { animation: none; } }
     .ex-card { flex: 0 0 auto; width: 840px; max-width: 94vw; margin-right: 1.75rem; border-radius: .9rem; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,.2); }
     @media (max-width: 640px){ .ex-card { width: 420px; } }
 
@@ -203,52 +203,27 @@
           <figure class="ex-card"><img src="planilhas%20exemplos/hq720.jpg" alt="Controle de vendas de eletrônicos criado com IA" loading="lazy" class="w-full block bg-soft" /></figure>
         </div>
       </div>
-      <p class="mt-4 text-sm font-medium text-black/50">Exemplos reais criados conversando com a IA. Arraste para o lado.</p>
+      <p class="mt-4 text-sm font-medium text-black/50">Exemplos reais criados conversando com a IA. Toque para pausar.</p>
       <script>
         (function () {
           var vp = document.getElementById("ex-viewport");
           var t = document.getElementById("ex-track");
           if (!vp || !t) return;
-          t.innerHTML += t.innerHTML; // duplica para loop infinito nos dois sentidos
-          var half = 0;
-          function measure(){ half = t.scrollWidth / 2; }
-          measure();
-          window.addEventListener("load", measure);
-          window.addEventListener("resize", measure);
-          if (window.ResizeObserver) new ResizeObserver(measure).observe(t);
-          vp.addEventListener("scroll", function () {
-            if (!half) return;
-            if (vp.scrollLeft >= half) vp.scrollLeft -= half;
-            else if (vp.scrollLeft <= 0) vp.scrollLeft += half;
-          });
-          var dragging = false, startX = 0, startScroll = 0, paused = false, rT;
-          function resumeSoon(){ clearTimeout(rT); rT = setTimeout(function () { paused = false; }, 1400); }
-          vp.addEventListener("mousedown", function (e) {
-            dragging = true; paused = true;
-            startX = e.pageX; startScroll = vp.scrollLeft;
-            vp.classList.add("dragging"); e.preventDefault();
-          });
-          window.addEventListener("mousemove", function (e) {
-            if (!dragging) return;
-            vp.scrollLeft = startScroll - (e.pageX - startX);
-          });
-          window.addEventListener("mouseup", function () {
-            if (!dragging) return;
-            dragging = false; vp.classList.remove("dragging"); resumeSoon();
-          });
-          vp.addEventListener("mouseenter", function () { paused = true; });
-          vp.addEventListener("mouseleave", function () { if (!dragging) resumeSoon(); });
-          vp.addEventListener("touchstart", function () { paused = true; }, { passive: true });
-          vp.addEventListener("touchend", function () { resumeSoon(); }, { passive: true });
-          var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-          function tick() {
-            if (!reduce && !paused && !dragging && half) {
-              vp.scrollLeft += 0.8;
-              if (vp.scrollLeft >= half) vp.scrollLeft -= half;
-            }
-            requestAnimationFrame(tick);
-          }
-          requestAnimationFrame(tick);
+          t.innerHTML += t.innerHTML; // duplica p/ loop perfeito (translateX -50%)
+          // velocidade constante (~70px/s) independente do tamanho da tela
+          function setSpeed(){ var half = t.scrollWidth / 2; if (half) t.style.animationDuration = Math.max(18, half / 70) + "s"; }
+          setSpeed();
+          window.addEventListener("load", setSpeed);
+          window.addEventListener("resize", setSpeed);
+          if (window.ResizeObserver) new ResizeObserver(setSpeed).observe(t);
+          // pausa só enquanto o dedo (ou o mouse) está em cima
+          function pause(){ t.classList.add("paused"); }
+          function play(){ t.classList.remove("paused"); }
+          vp.addEventListener("touchstart", pause, { passive: true });
+          vp.addEventListener("touchend", play, { passive: true });
+          vp.addEventListener("touchcancel", play, { passive: true });
+          vp.addEventListener("mouseenter", pause);
+          vp.addEventListener("mouseleave", play);
         })();
       </script>
 
