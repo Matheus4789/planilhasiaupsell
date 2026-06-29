@@ -231,6 +231,22 @@
     .sticky button{ flex-shrink:0; display:inline-flex; align-items:center; gap:.4rem; background:var(--lime); color:#000; font-family:"Poppins",sans-serif; font-weight:800; font-size:.95rem; border:2px solid #000; border-radius:.7rem; padding:.7rem 1.1rem; box-shadow:4px 4px 0 0 #000; cursor:pointer; }
     @media(min-width:640px){ .sticky{ justify-content:center; gap:1.75rem; } }
 
+    /* ===== popup de última chance (acionado pela recusa e pelo botão voltar) ===== */
+    .lc-modal{ position:fixed; inset:0; z-index:1000; display:none; align-items:center; justify-content:center; padding:18px; background:rgba(0,0,0,.72); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); overflow-y:auto; }
+    .lc-modal.open{ display:flex; }
+    .lc-card{ position:relative; width:100%; max-width:420px; margin:auto; background:var(--deep); color:#fff; border:2px solid #000; border-radius:1.25rem; padding:28px 22px 22px; box-shadow:8px 8px 0 0 #000; text-align:center; animation:lcPop .25s ease; }
+    @keyframes lcPop{ from{transform:translateY(16px) scale(.97); opacity:0} to{transform:none; opacity:1} }
+    .lc-close{ position:absolute; top:12px; right:12px; width:34px; height:34px; border:2px solid #000; border-radius:9999px; background:#fff; color:#000; font-size:19px; line-height:1; font-weight:800; cursor:pointer; }
+    .lc-close:hover{ background:var(--lime); }
+    .lc-tag{ display:inline-block; background:var(--lime); color:#000; font-weight:800; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; padding:.32rem .85rem; border:2px solid #000; border-radius:9999px; box-shadow:2px 2px 0 0 #000; }
+    .lc-title{ font-family:"Poppins",sans-serif; font-weight:800; letter-spacing:-.02em; line-height:1.05; font-size:clamp(1.35rem,5.5vw,1.85rem); margin:.85rem 0 0; }
+    .lc-title em{ font-style:normal; color:var(--lime); }
+    .lc-text{ margin:.7rem auto 0; max-width:23rem; font-size:.95rem; font-weight:500; line-height:1.4; color:rgba(255,255,255,.82); }
+    .lc-text strong{ color:#fff; font-weight:800; }
+    .lc-accept{ display:flex; align-items:center; justify-content:center; gap:.5rem; width:100%; margin-top:1.15rem; background:var(--lime); color:#000; border:2px solid #000; border-radius:.9rem; box-shadow:4px 4px 0 0 #000; cursor:pointer; font-family:"Poppins",sans-serif; font-weight:800; font-size:clamp(1rem,4vw,1.15rem); padding:.95rem 1rem; line-height:1.12; }
+    .lc-decline{ display:block; width:100%; margin-top:.85rem; background:none; border:none; cursor:pointer; font-family:inherit; font-size:.82rem; font-weight:700; color:rgba(255,255,255,.5); text-decoration:underline; text-underline-offset:3px; }
+    .lc-decline:hover{ color:rgba(255,255,255,.85); }
+
     .arrow{ width:1.1em; height:1.1em; }
     @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .btn-press,.cta-pulse,.sticky,.wait-band .arrow-down{ transition:none; animation:none; } }
   </style>
@@ -457,6 +473,21 @@
     </button>
   </div>
 
+  <!-- ===== POPUP ÚLTIMA CHANCE (aberto pelo "Não, obrigado" e pelo botão voltar) ===== -->
+  <div id="lc-modal" class="lc-modal" role="dialog" aria-modal="true" aria-labelledby="lc-title">
+    <div class="lc-card">
+      <button class="lc-close" type="button" aria-label="Fechar" onclick="fecharPopup()">×</button>
+      <span class="lc-tag">⚠️ Espere! Última chance</span>
+      <h3 class="lc-title" id="lc-title">Quer mesmo sair <em>sem o Pack</em>?</h3>
+      <p class="lc-text">Você não digita o cartão de novo: é <strong>1 clique</strong> e o Pack Office Completo 2026 entra no seu pedido com um <strong>desconto especial</strong> que só existe agora.</p>
+      <button class="lc-accept cta-pulse btn-press" type="button" onclick="aproveitarDesconto()">
+        QUERO APROVEITAR O DESCONTO
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <button class="lc-decline" type="button" onclick="sairSemPack()">Não, quero sair mesmo assim</button>
+    </div>
+  </div>
+
   <script>
     /* =========================================================
        >>> CONFIGURAÇÃO — TROQUE OS 2 LINKS ABAIXO <<<
@@ -480,12 +511,38 @@
       if (window.fbq) fbq('track', 'AddToCart', { value: 19.90, currency: 'BRL' });
       window.location.href = withUtms(CHECKOUT_UPSELL);
     }
-    function recusarUpsell(){
-      window.location.href = withUtms(URL_RECUSA);
-    }
     function irAreaMembros(){
       window.location.href = withUtms(URL_AREA_MEMBROS);
     }
+
+    /* ---- popup de última chance ---- */
+    function abrirPopup(){
+      var m = document.getElementById('lc-modal');
+      if(!m){ window.location.href = withUtms(URL_RECUSA); return; } // fallback
+      m.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function fecharPopup(){
+      var m = document.getElementById('lc-modal');
+      if(m){ m.classList.remove('open'); document.body.style.overflow = ''; }
+    }
+    // "Não, obrigado" abre o popup (segura o lead na página)
+    function recusarUpsell(){ abrirPopup(); }
+    // CTA do popup: vai pro downsell com desconto
+    function aproveitarDesconto(){
+      if (window.fbq) fbq('trackCustom', 'AceitouDownsell');
+      window.location.href = withUtms(URL_RECUSA);
+    }
+    // "Sair mesmo assim": vai pra área de membros
+    function sairSemPack(){ irAreaMembros(); }
+
+    // fecha o popup ao clicar fora do card ou apertar Esc
+    (function(){
+      var m = document.getElementById('lc-modal');
+      if(!m) return;
+      m.addEventListener('click', function(e){ if(e.target === m) fecharPopup(); });
+      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') fecharPopup(); });
+    })();
 
     // barra fixa: aparece depois que o usuário rola além do hero
     (function(){
@@ -499,13 +556,14 @@
       if(footer) new IntersectionObserver(function(e){ inFooter = e[0].isIntersecting; update(); }, {threshold:0.05}).observe(footer);
     })();
 
-    // BACK REDIRECT: se a pessoa apertar "voltar"/tentar sair, leva pro
-    // downsell com desconto (mesmo link do "Não, obrigado").
+    // BACK REDIRECT: ao apertar "voltar"/tentar sair, em vez de perder o lead,
+    // mostramos o MESMO popup de última chance e o seguramos na página.
     (function(){
       try {
         history.pushState(null, '', location.href);
         window.addEventListener('popstate', function(){
-          window.location.href = withUtms(URL_RECUSA);
+          history.pushState(null, '', location.href); // re-arma p/ continuar segurando
+          abrirPopup();
         });
       } catch(e){}
     })();
