@@ -405,7 +405,7 @@
 
         <p class="cta-note" style="margin-top:0;margin-bottom:.9rem">✅ <strong>Você não digita o cartão de novo.</strong> É 1 clique e o Pack entra no pedido que você acabou de fazer.</p>
 
-        <!-- Botão oficial de upsell 1-clique (wiapy): aceite + recusa -->
+        <!-- Botão oficial de upsell 1-clique (wiapy): só o aceite -->
         <div id="wiapy_upsell" style="margin:0 1.25rem 1.25rem"></div>
         <script>
           initWiapyUpsell({
@@ -416,12 +416,14 @@
                   hoverBackgroundColor: "#147A45",
                   fontSize: "18px",
                   borderRadius: "16px"
-              },
-              refusalLinkUrl: "https://pay.wiapy.com/checkout/6a425e08e296d133479b9574",
-              refusalLinkText: "Recusar esta oferta",
-              refusalLinkColor: "#000000"
+              }
           });
         </script>
+
+        <!-- recusa própria: abre o popup do downsell (não redireciona na hora) -->
+        <div class="decline">
+          <button type="button" onclick="abrirPopup()">Recusar esta oferta</button>
+        </div>
       </div>
 
       <div class="trust">
@@ -584,10 +586,6 @@
           var t = (el.textContent || '').toUpperCase();
           if(t.indexOf('ACEITO') > -1 || t.indexOf('SIM') > -1){
             el.classList.add('wiapy-accept-styled'); achou = true;
-          } else if(t.indexOf('RECUSAR') > -1 || t.indexOf('RECUSO') > -1){
-            el.classList.add('wiapy-refusal-styled');
-            // recusar o upsell abre o popup do downsell (em vez de sair na hora)
-            el.addEventListener('click', function(ev){ ev.preventDefault(); abrirPopup(); });
           }
         });
         return achou;
