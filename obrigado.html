@@ -108,10 +108,6 @@
       background:var(--lime); color:#000; font-weight:800; font-size:.72rem; letter-spacing:.02em;
       padding:.35rem .8rem; border:2px solid #000; border-radius:9999px;
     }
-    .check-ring{
-      width:78px; height:78px; margin:1.1rem auto 0; display:grid; place-items:center;
-      background:var(--green); border:2px solid #000; border-radius:9999px; box-shadow:4px 4px 0 0 #000;
-    }
     .h1{ font-weight:800; letter-spacing:-.03em; line-height:1.02; font-size:clamp(1.9rem,6vw,3rem); margin:1.1rem 0 0; }
     .lede{ max-width:34rem; margin:.9rem auto 0; font-size:clamp(1rem,2.6vw,1.18rem); color:rgba(255,255,255,.82); font-weight:500; }
 
@@ -128,13 +124,11 @@
     /* ====== faixa ESPERE (destaque máximo) ====== */
     .wait-band{ background:var(--danger); color:#fff; border-bottom:2px solid #000; text-align:center; box-shadow:0 6px 0 0 rgba(0,0,0,.18); }
     .wait-band .inner{ padding:1.6rem 1rem 1.5rem; max-width:46rem; margin:0 auto; }
-    .wait-band .badge-stop{ display:inline-flex; align-items:center; gap:.4rem; background:#fff; color:var(--danger); font-weight:800; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; padding:.35rem .85rem; border:2px solid #000; border-radius:9999px; box-shadow:3px 3px 0 0 #000; animation:flash 1.3s ease-in-out infinite; }
-    .wait-band h2{ font-weight:800; letter-spacing:-.02em; line-height:1.02; font-size:clamp(1.7rem,6.5vw,2.7rem); margin:.85rem 0 0; text-shadow:2px 2px 0 rgba(0,0,0,.22); }
+    .wait-band h2{ font-weight:800; letter-spacing:-.02em; line-height:1.02; font-size:clamp(1.7rem,6.5vw,2.7rem); margin:0; text-shadow:2px 2px 0 rgba(0,0,0,.22); }
     .wait-band h2 .blink{ background:#fff; color:var(--danger); padding:0 .3rem; border-radius:.2rem; display:inline-block; }
     .wait-band p{ margin:.7rem auto 0; max-width:31rem; font-size:clamp(.98rem,2.7vw,1.18rem); font-weight:600; color:#fff; line-height:1.35; }
     .wait-band p strong{ font-weight:800; text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:2px; }
     .wait-band .arrow-down{ margin-top:.7rem; font-size:1.7rem; line-height:1; animation:bounce 1.1s ease-in-out infinite; }
-    @keyframes flash{ 0%,100%{opacity:1} 50%{opacity:.45} }
     @keyframes bounce{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(7px)} }
 
     /* ====== seção oferta ====== */
@@ -238,7 +232,7 @@
     @media(min-width:640px){ .sticky{ justify-content:center; gap:1.75rem; } }
 
     .arrow{ width:1.1em; height:1.1em; }
-    @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .btn-press,.cta-pulse,.sticky,.wait-band .badge-stop,.wait-band .arrow-down{ transition:none; animation:none; } }
+    @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .btn-press,.cta-pulse,.sticky,.wait-band .arrow-down{ transition:none; animation:none; } }
   </style>
 </head>
 
@@ -247,14 +241,10 @@
   <!-- ============ HERO: CONFIRMAÇÃO ============ -->
   <header class="hero grid-pattern-dark">
     <div class="wrap">
-      <img src="imagens/logo-plania.png" alt="PlanIA — planilhas com IA" class="logo" />
+      <img src="imagens/logo-plania.png" alt="PlanIA, planilhas com IA" class="logo" />
 
       <div style="margin-top:1.4rem">
         <span class="badge">✓ PAGAMENTO APROVADO</span>
-      </div>
-
-      <div class="check-ring">
-        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>
       </div>
 
       <h1 class="h1">Pronto! Seu acesso já<br>está liberado 🎉</h1>
@@ -273,9 +263,8 @@
   <!-- ============ FAIXA: ESPERE ============ -->
   <div class="wait-band">
     <div class="inner">
-      <span class="badge-stop">✋ Pare 30 segundos</span>
       <h2>⚠️ <span class="blink">ESPERE!</span> Não feche esta página</h2>
-      <p>Seu acesso já está garantido — mas a oferta abaixo <strong>só aparece agora</strong> e some pra sempre se você sair.</p>
+      <p>Seu acesso já está garantido, mas a oferta abaixo <strong>só aparece agora</strong> e some pra sempre se você sair.</p>
       <div class="arrow-down">👇</div>
     </div>
   </div>
@@ -285,14 +274,14 @@
     <div class="wrap">
       <p class="kicker">Oferta única · só aparece aqui, agora</p>
       <h2 class="h2">Você vai criar planilhas com IA. Que tal já levar o <em>arsenal pronto</em> junto?</h2>
-      <p class="sub">No curso você aprende a criar tudo do zero com a IA. Mas pra quem quer ir <strong>ainda mais rápido</strong>, separamos um pacote com centenas de modelos prontos de Office pra você só abrir, editar e usar — hoje.</p>
+      <p class="sub">No curso você aprende a criar tudo do zero com a IA. Mas pra quem quer ir <strong>ainda mais rápido</strong>, separamos um pacote com centenas de modelos prontos de Office pra você só abrir, editar e usar hoje mesmo.</p>
 
       <!-- CARD DO PRODUTO -->
       <div class="pack">
         <div class="pack-top">
           <span class="pack-tag">⚡ SÓ NESTA PÁGINA</span>
           <div class="pack-name">Pack Office Completo <span class="yr">2026</span></div>
-          <p class="pack-desc">Mais de 300 templates profissionais de Excel, Word, PowerPoint e Power BI — prontos pra editar em segundos.</p>
+          <p class="pack-desc">Mais de 300 templates profissionais de Excel, Word, PowerPoint e Power BI, prontos pra editar em segundos.</p>
         </div>
 
         <div class="pack-body">
@@ -301,7 +290,7 @@
               <div class="ic ic-xls">X</div>
               <div>
                 <div class="item-h">Templates no Excel</div>
-                <div class="item-p">Financeiro, vendas, estoque, fluxo de caixa, RH e mais — só trocar os dados.</div>
+                <div class="item-p">Financeiro, vendas, estoque, fluxo de caixa, RH e mais. Só trocar os dados.</div>
                 <div class="item-val"><s>R$ 97</s> incluso</div>
               </div>
             </div>
@@ -369,7 +358,7 @@
 
         <!-- PREÇO -->
         <div class="pricebox">
-          <p class="stack-sum">Valor real do pacote: <s>R$ 502</s> — hoje, só aqui:</p>
+          <p class="stack-sum">Valor real do pacote: <s>R$ 502</s>. Hoje, só aqui:</p>
           <div class="price-now">
             <span class="cur">R$</span>
             <span class="val">19</span>
@@ -405,7 +394,7 @@
         <img src="imagens/selo-garantia-7-dias.png" alt="Selo de garantia de 7 dias" />
         <div>
           <h3>O risco é todo meu</h3>
-          <p>O Pack também tem <strong>7 dias de garantia incondicional</strong>. Se você abrir os templates e sentir que não é pra você, devolvemos <strong>100% do valor</strong> — sem pergunta chata.</p>
+          <p>O Pack também tem <strong>7 dias de garantia incondicional</strong>. Se você abrir os templates e sentir que não é pra você, devolvemos <strong>100% do valor</strong>, sem pergunta chata.</p>
         </div>
       </div>
     </div>
