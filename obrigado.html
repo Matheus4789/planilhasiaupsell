@@ -39,6 +39,9 @@
     defer
   ></script>
 
+  <!-- Wiapy: upsell 1-clique -->
+  <script src="https://wiapy.com/sell/1.0.0/sell.min.js"></script>
+
   <link rel="stylesheet" href="fonts.css" />
 
   <style>
@@ -383,15 +386,25 @@
           <span class="once">💳 Pagamento único · acesso vitalício</span>
         </div>
 
-        <button class="cta-accept cta-pulse btn-press" type="button" onclick="aceitarUpsell()">
-          SIM! Quero adicionar o Pack ao meu pedido
-          <svg viewBox="0 0 24 24" class="arrow" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </button>
-        <p class="cta-note">✅ <strong>Você não digita o cartão de novo.</strong> É 1 clique e o Pack entra no pedido que você acabou de fazer.</p>
+        <p class="cta-note" style="margin-top:0;margin-bottom:.9rem">✅ <strong>Você não digita o cartão de novo.</strong> É 1 clique e o Pack entra no pedido que você acabou de fazer.</p>
 
-        <div class="decline">
-          <button type="button" onclick="recusarUpsell()">Não, obrigado. Não quero o Pack completo agora.</button>
-        </div>
+        <!-- Botão oficial de upsell 1-clique (wiapy): aceite + recusa -->
+        <div id="wiapy_upsell" style="margin:0 1.25rem 1.25rem"></div>
+        <script>
+          initWiapyUpsell({
+              linkUrl: "https://pay.wiapy.com/checkout/6a425d34de883dd348db4736",
+              linkText: "SIM, EU ACEITO ESSA OFERTA",
+              styles: {
+                  backgroundColor: "#00d769",
+                  hoverBackgroundColor: "#00b85a",
+                  fontSize: "17px",
+                  borderRadius: "10px"
+              },
+              refusalLinkUrl: "https://wiapy.com/login",
+              refusalLinkText: "Recusar está oferta",
+              refusalLinkColor: "#000000"
+          });
+        </script>
       </div>
 
       <div class="trust">
@@ -473,7 +486,7 @@
     </button>
   </div>
 
-  <!-- ===== POPUP ÚLTIMA CHANCE (aberto pelo "Não, obrigado" e pelo botão voltar) ===== -->
+  <!-- ===== POPUP ÚLTIMA CHANCE (aberto pelo botão voltar do navegador) ===== -->
   <div id="lc-modal" class="lc-modal" role="dialog" aria-modal="true" aria-labelledby="lc-title">
     <div class="lc-card">
       <button class="lc-close" type="button" aria-label="Fechar" onclick="fecharPopup()">×</button>
@@ -492,9 +505,9 @@
     /* =========================================================
        >>> CONFIGURAÇÃO — TROQUE OS 2 LINKS ABAIXO <<<
        --------------------------------------------------------- */
-    // 1) Link de pagamento (1 clique) do Pack — botão "SIM, quero adicionar":
-    var CHECKOUT_UPSELL  = 'https://pay.wiapy.com/6a42578171f7fb05254731b6';
-    // 2) Link do botão "Não, obrigado" (recusa do Pack):
+    // 1) Link de pagamento (1 clique) do Pack — usado na barra fixa (mesmo do widget wiapy):
+    var CHECKOUT_UPSELL  = 'https://pay.wiapy.com/checkout/6a425d34de883dd348db4736';
+    // 2) Link do popup de saída / downsell com desconto (botão voltar):
     var URL_RECUSA       = 'https://pay.wiapy.com/ZP3bNaZY1k';
     // 3) Link da sua área de membros — botão do rodapé:
     var URL_AREA_MEMBROS = 'https://areademembros-plania.vercel.app';
@@ -526,8 +539,6 @@
       var m = document.getElementById('lc-modal');
       if(m){ m.classList.remove('open'); document.body.style.overflow = ''; }
     }
-    // "Não, obrigado" abre o popup (segura o lead na página)
-    function recusarUpsell(){ abrirPopup(); }
     // CTA do popup: vai pro downsell com desconto
     function aproveitarDesconto(){
       if (window.fbq) fbq('trackCustom', 'AceitouDownsell');
