@@ -417,8 +417,8 @@
                   fontSize: "18px",
                   borderRadius: "16px"
               },
-              refusalLinkUrl: "https://wiapy.com/login",
-              refusalLinkText: "Recusar está oferta",
+              refusalLinkUrl: "https://pay.wiapy.com/checkout/6a425e08e296d133479b9574",
+              refusalLinkText: "Recusar esta oferta",
               refusalLinkColor: "#000000"
           });
         </script>
@@ -524,8 +524,8 @@
        --------------------------------------------------------- */
     // 1) Link de pagamento (1 clique) do Pack — usado na barra fixa (mesmo do widget wiapy):
     var CHECKOUT_UPSELL  = 'https://pay.wiapy.com/checkout/6a425d34de883dd348db4736';
-    // 2) Link do popup de saída / downsell com desconto (botão voltar):
-    var URL_RECUSA       = 'https://pay.wiapy.com/ZP3bNaZY1k';
+    // 2) Link 1-clique do DOWNSELL — botão do popup (saída / recusa / voltar):
+    var URL_RECUSA       = 'https://pay.wiapy.com/checkout/6a425e08e296d133479b9574';
     // 3) Link da sua área de membros — botão do rodapé:
     var URL_AREA_MEMBROS = 'https://areademembros-plania.vercel.app';
     /* ========================================================= */
@@ -586,6 +586,8 @@
             el.classList.add('wiapy-accept-styled'); achou = true;
           } else if(t.indexOf('RECUSAR') > -1 || t.indexOf('RECUSO') > -1){
             el.classList.add('wiapy-refusal-styled');
+            // recusar o upsell abre o popup do downsell (em vez de sair na hora)
+            el.addEventListener('click', function(ev){ ev.preventDefault(); abrirPopup(); });
           }
         });
         return achou;
