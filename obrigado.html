@@ -516,7 +516,7 @@
         QUERO APROVEITAR O DESCONTO
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </button>
-      <button class="lc-decline" type="button" onclick="sairSemPack()">Não, quero sair mesmo assim</button>
+      <button class="lc-decline" type="button" onclick="sairSemPack()">Não, obrigado. Ir para minha área de membros</button>
     </div>
   </div>
 
@@ -574,24 +574,24 @@
       document.addEventListener('keydown', function(e){ if(e.key === 'Escape') fecharPopup(); });
     })();
 
-    // aplica o visual neo-brutal ao botão que o widget wiapy gera
+    // estiliza o botão de aceite do widget wiapy e esconde a recusa padrão dele
+    // (usamos a nossa própria recusa, que abre o popup do downsell)
     (function(){
       var box = document.getElementById('wiapy_upsell');
       if(!box) return;
       function estilizar(){
-        var els = box.querySelectorAll('a, button');
-        if(!els.length) return false;
-        var achou = false;
-        els.forEach(function(el){
+        box.querySelectorAll('a, button').forEach(function(el){
           var t = (el.textContent || '').toUpperCase();
           if(t.indexOf('ACEITO') > -1 || t.indexOf('SIM') > -1){
-            el.classList.add('wiapy-accept-styled'); achou = true;
+            el.classList.add('wiapy-accept-styled');
+          } else {
+            el.style.display = 'none'; // recusa padrão do widget: escondida
           }
         });
-        return achou;
       }
-      if(!estilizar() && 'MutationObserver' in window){
-        var obs = new MutationObserver(function(){ if(estilizar()) obs.disconnect(); });
+      estilizar();
+      if('MutationObserver' in window){
+        var obs = new MutationObserver(estilizar);
         obs.observe(box, { childList:true, subtree:true });
         setTimeout(function(){ obs.disconnect(); }, 6000);
       }
