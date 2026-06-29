@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(grep -n 'valem +R\\\\$ 640\\\\|valem mais de R\\\\$ 640\\\\|640' pagina-de-vendas.html)"
-    ]
-  }
-}

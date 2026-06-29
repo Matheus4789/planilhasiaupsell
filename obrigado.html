@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compra aprovada! Seu acesso ao PlanIA está liberado 🎉</title>
+  <meta name="description" content="Seu acesso ao PlanIA foi liberado. Antes de começar, libere o Pack Office Completo 2026 com templates de Excel, Word, PowerPoint e Power BI." />
+  <!-- Página de pós-venda / oferta única: não deve ser indexada -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1410082330928461');
+    fbq('track', 'PageView');
+    // Conversão do produto principal (front-end): a compra que acabou de acontecer.
+    // >>> AJUSTE o valor conforme o plano comprado (9.90 = Essencial, 19.90 = Completo).
+    fbq('track', 'Purchase', { value: 19.90, currency: 'BRL' });
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1410082330928461&ev=PageView&noscript=1" /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <!-- Utmify UTM tracking (carrega os UTMs do anúncio) -->
+  <script
+    src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+    data-utmify-prevent-xcod-sck
+    data-utmify-prevent-subids
+    data-utmify-ignore-iframe
+    data-utmify-is-cartpanda
+    async
+    defer
+  ></script>
+
+  <link rel="stylesheet" href="fonts.css" />
+
+  <style>
+    :root{
+      color-scheme: light;
+      --green:#1FA463; --deep:#0E4D32; --lime:#6FE3A4; --mint:#E3F5EA;
+      --sage:#B5D9C4; --soft:#EFF7F2; --card:#0B3D29; --success:#147A45;
+      --star:#FFBC2E; --danger:#E0464A; --ink:#000;
+    }
+    *,*::before,*::after{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+    body{
+      margin:0; background:#fff; color:#000;
+      font-family:"Inter", system-ui, sans-serif; font-weight:500;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+    h1,h2,h3,h4,.font-heading{ font-family:"Poppins", sans-serif; }
+    img{ max-width:100%; height:auto; display:block; }
+    a{ color:inherit; text-decoration:none; }
+
+    .wrap{ width:100%; max-width:56rem; margin:0 auto; padding:0 1rem; }
+    .wrap-sm{ max-width:46rem; }
+
+    /* fundo de grade de planilha */
+    .grid-pattern{
+      background-image:
+        linear-gradient(to right, rgba(14,77,50,0.09) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(14,77,50,0.09) 1px, transparent 1px);
+      background-size:34px 34px;
+    }
+    .grid-pattern-dark{
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size:34px 34px;
+    }
+
+    /* tokens neo-brutalistas */
+    .b2{ border:2px solid #000; }
+    .sh{ box-shadow:8px 8px 0 0 #000; }
+    .sh-sm{ box-shadow:4px 4px 0 0 #000; }
+    .sh-lg{ box-shadow:12px 12px 0 0 #000; }
+    .rounded{ border-radius:1rem; }
+    .rounded-lg{ border-radius:1.25rem; }
+    .rounded-xl{ border-radius:1.5rem; }
+    .pill{ border-radius:9999px; }
+
+    .btn-press{ transition:transform .2s cubic-bezier(.175,.885,.32,1.275), box-shadow .2s; }
+    .btn-press:hover{ transform:translate(4px,4px); }
+    .btn-press.sh:hover, .btn-press.sh-sm:hover{ box-shadow:0 0 0 0 #000; }
+
+    @keyframes cta-pulse{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
+    .cta-pulse{ animation:cta-pulse 2.2s ease-in-out infinite; }
+    .cta-pulse:hover{ animation:none; }
+
+    .rot-3{ transform:rotate(3deg); }
+    .rot-n1{ transform:rotate(-1deg); }
+
+    /* ====== HERO confirmação ====== */
+    .hero{ position:relative; background:var(--deep); color:#fff; border-bottom:2px solid #000; overflow:hidden; }
+    .hero .wrap{ position:relative; padding-top:2.5rem; padding-bottom:2.75rem; text-align:center; }
+    .logo{ height:2.5rem; width:auto; margin:0 auto; }
+
+    .badge{
+      display:inline-flex; align-items:center; gap:.45rem;
+      background:var(--lime); color:#000; font-weight:800; font-size:.72rem; letter-spacing:.02em;
+      padding:.35rem .8rem; border:2px solid #000; border-radius:9999px;
+    }
+    .check-ring{
+      width:78px; height:78px; margin:1.1rem auto 0; display:grid; place-items:center;
+      background:var(--green); border:2px solid #000; border-radius:9999px; box-shadow:4px 4px 0 0 #000;
+    }
+    .h1{ font-weight:800; letter-spacing:-.03em; line-height:1.02; font-size:clamp(1.9rem,6vw,3rem); margin:1.1rem 0 0; }
+    .lede{ max-width:34rem; margin:.9rem auto 0; font-size:clamp(1rem,2.6vw,1.18rem); color:rgba(255,255,255,.82); font-weight:500; }
+    .mail-note{
+      display:inline-flex; align-items:center; gap:.6rem; margin-top:1.1rem;
+      background:rgba(255,255,255,.08); border:2px solid rgba(255,255,255,.18);
+      border-radius:.9rem; padding:.7rem 1rem; font-size:.85rem; font-weight:700; color:rgba(255,255,255,.92);
+      text-align:left;
+    }
+
+    /* etapas */
+    .steps{ display:flex; align-items:center; justify-content:center; gap:.5rem; margin-top:1.4rem; flex-wrap:wrap; }
+    .step{ display:inline-flex; align-items:center; gap:.4rem; font-size:.72rem; font-weight:800; color:rgba(255,255,255,.55); }
+    .step .dot{ width:1.15rem; height:1.15rem; border-radius:9999px; display:grid; place-items:center; border:2px solid rgba(255,255,255,.4); font-size:.62rem; }
+    .step.done .dot{ background:var(--lime); border-color:var(--lime); color:#000; }
+    .step.done{ color:#fff; }
+    .step.now .dot{ background:#fff; border-color:#fff; color:var(--deep); }
+    .step.now{ color:#fff; }
+    .step-line{ width:1.5rem; height:2px; background:rgba(255,255,255,.25); }
+
+    /* ====== faixa ESPERE ====== */
+    .wait-band{ background:var(--danger); color:#fff; border-bottom:2px solid #000; text-align:center; }
+    .wait-band .inner{ padding:.7rem 1rem; font-weight:800; font-size:clamp(.85rem,2.4vw,1.05rem); letter-spacing:.01em; display:flex; align-items:center; justify-content:center; gap:.5rem; flex-wrap:wrap; }
+
+    /* ====== seção oferta ====== */
+    .oto{ position:relative; background:var(--mint); border-bottom:2px solid #000; }
+    .oto .wrap{ position:relative; padding:2.75rem 1rem 3rem; }
+    .kicker{ text-align:center; font-weight:800; color:var(--success); font-size:.8rem; letter-spacing:.08em; text-transform:uppercase; }
+    .h2{ text-align:center; font-weight:800; letter-spacing:-.03em; line-height:1.05; font-size:clamp(1.6rem,5vw,2.4rem); margin:.6rem auto 0; max-width:32rem; }
+    .h2 em{ font-style:normal; background:var(--lime); border:2px solid #000; padding:0 .25rem; display:inline-block; transform:rotate(-1deg); }
+    .sub{ text-align:center; max-width:36rem; margin:1rem auto 0; font-size:1.05rem; color:rgba(0,0,0,.78); font-weight:500; }
+
+    /* card produto */
+    .pack{ margin:1.8rem auto 0; max-width:42rem; background:#fff; border:2px solid #000; border-radius:1.5rem; box-shadow:8px 8px 0 0 #000; overflow:hidden; }
+    .pack-top{ position:relative; background:var(--card); color:#fff; padding:1.4rem 1.25rem 1.25rem; border-bottom:2px solid #000; text-align:center; }
+    .pack-tag{ position:absolute; top:-2px; right:1.1rem; background:var(--lime); color:#000; font-weight:800; font-size:.66rem; letter-spacing:.02em; padding:.35rem .7rem; border:2px solid #000; border-radius:0 0 .6rem .6rem; }
+    .pack-name{ font-weight:800; letter-spacing:-.02em; font-size:clamp(1.4rem,4.6vw,1.9rem); line-height:1.05; }
+    .pack-name .yr{ color:var(--lime); }
+    .pack-desc{ margin:.5rem auto 0; max-width:26rem; font-size:.92rem; color:rgba(255,255,255,.72); font-weight:500; }
+
+    .pack-body{ padding:1.25rem; }
+    .items{ display:grid; grid-template-columns:1fr; gap:.7rem; }
+    @media(min-width:560px){ .items{ grid-template-columns:1fr 1fr; } }
+    .item{ display:flex; gap:.75rem; align-items:flex-start; background:var(--soft); border:2px solid #000; border-radius:.9rem; padding:.8rem .85rem; }
+    .ic{ flex:0 0 auto; width:2.6rem; height:2.6rem; border:2px solid #000; border-radius:.6rem; display:grid; place-items:center; font-family:"Poppins",sans-serif; font-weight:800; color:#fff; font-size:1rem; box-shadow:2px 2px 0 0 #000; }
+    .ic-xls{ background:#217346; } .ic-doc{ background:#2B579A; } .ic-ppt{ background:#C43E1C; }
+    .ic-pbi{ background:#F2C811; color:#000; } .ic-cht{ background:var(--green); } .ic-gift{ background:var(--lime); color:#000; }
+    .item-h{ font-weight:800; font-size:.95rem; letter-spacing:-.01em; line-height:1.15; }
+    .item-p{ font-size:.8rem; color:rgba(0,0,0,.6); font-weight:500; margin-top:.15rem; }
+    .item-val{ margin-top:.3rem; font-size:.72rem; font-weight:800; color:var(--success); }
+    .item-val s{ color:rgba(0,0,0,.35); font-weight:700; }
+
+    /* prova visual */
+    .proof{ margin-top:1.1rem; }
+    .proof-label{ font-size:.72rem; font-weight:800; color:rgba(0,0,0,.45); text-transform:uppercase; letter-spacing:.05em; margin-bottom:.5rem; }
+    .proof-row{ display:flex; gap:.6rem; overflow-x:auto; padding-bottom:.35rem; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+    .proof-row::-webkit-scrollbar{ display:none; }
+    .proof-row img{ flex:0 0 auto; width:230px; border:2px solid #000; border-radius:.6rem; box-shadow:3px 3px 0 0 #000; background:var(--soft); }
+
+    /* stack de valor + preço */
+    .pricebox{ margin:1.25rem; background:var(--mint); border:2px dashed #000; border-radius:1rem; padding:1.1rem; text-align:center; }
+    .stack-sum{ font-size:.85rem; font-weight:700; color:rgba(0,0,0,.55); }
+    .stack-sum s{ color:var(--danger); }
+    .price-now{ display:flex; align-items:flex-end; justify-content:center; gap:.5rem; margin-top:.25rem; }
+    .price-now .cur{ font-family:"Poppins",sans-serif; font-weight:800; font-size:1.1rem; color:var(--deep); margin-bottom:.45rem; }
+    .price-now .val{ font-family:"Poppins",sans-serif; font-weight:800; font-size:clamp(2.8rem,11vw,3.6rem); line-height:.9; letter-spacing:-.04em; color:var(--green); }
+    .price-cents{ font-family:"Poppins",sans-serif; font-weight:800; font-size:1.4rem; color:var(--green); margin-bottom:.4rem; }
+    .once{ display:inline-block; margin-top:.45rem; background:#fff; border:2px solid #000; border-radius:9999px; padding:.2rem .8rem; font-size:.72rem; font-weight:800; }
+
+    .cta-accept{
+      display:flex; align-items:center; justify-content:center; gap:.6rem; width:calc(100% - 2.5rem);
+      margin:0 1.25rem; background:var(--green); color:#fff; border:2px solid #000; border-radius:1rem;
+      box-shadow:6px 6px 0 0 #000; cursor:pointer; text-align:center;
+      font-family:"Poppins",sans-serif; font-weight:800; font-size:clamp(1.05rem,3.4vw,1.3rem);
+      padding:1.05rem 1rem; line-height:1.1;
+    }
+    .cta-note{ margin:.7rem 1.25rem 0; text-align:center; font-size:.78rem; font-weight:700; color:rgba(0,0,0,.6); }
+    .cta-note strong{ color:#000; }
+
+    .decline{ display:block; margin:1.1rem auto 1.25rem; text-align:center; }
+    .decline button{ background:none; border:none; cursor:pointer; font-family:inherit; font-size:.85rem; font-weight:700; color:rgba(0,0,0,.45); text-decoration:underline; text-underline-offset:3px; }
+    .decline button:hover{ color:rgba(0,0,0,.75); }
+
+    /* selos de confiança */
+    .trust{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:.5rem; margin:1.4rem auto 0; max-width:42rem; }
+    .trust span{ display:inline-flex; align-items:center; gap:.35rem; background:#fff; border:2px solid #000; border-radius:9999px; padding:.3rem .75rem; font-size:.74rem; font-weight:800; }
+
+    /* garantia */
+    .guarantee{ background:#fff; border-bottom:2px solid #000; }
+    .guarantee .wrap{ padding:2.5rem 1rem; }
+    .g-card{ display:flex; align-items:center; gap:1.25rem; background:var(--sage); border:2px solid #000; border-radius:1.5rem; box-shadow:8px 8px 0 0 #000; padding:1.5rem; }
+    .g-card img{ width:clamp(72px,18vw,112px); flex-shrink:0; }
+    .g-card h3{ font-weight:800; letter-spacing:-.02em; font-size:clamp(1.2rem,4vw,1.6rem); }
+    .g-card p{ margin-top:.5rem; font-size:.92rem; color:rgba(0,0,0,.8); font-weight:500; }
+
+    /* faq */
+    .faq{ background:var(--mint); }
+    .faq .wrap{ padding:2.5rem 1rem; }
+    .faq h2{ text-align:center; font-weight:800; letter-spacing:-.03em; font-size:clamp(1.5rem,5vw,2.1rem); }
+    details.q{ background:#fff; border:2px solid #000; border-radius:.9rem; box-shadow:4px 4px 0 0 #000; margin-top:.85rem; overflow:hidden; }
+    details.q summary{ list-style:none; cursor:pointer; padding:1rem 1.1rem; font-weight:800; display:flex; align-items:center; justify-content:space-between; gap:1rem; font-size:.95rem; }
+    details.q summary::-webkit-details-marker{ display:none; }
+    details.q .plus{ flex:0 0 auto; font-family:"Poppins",sans-serif; font-size:1.4rem; color:var(--green); transition:transform .2s ease; }
+    details.q[open] .plus{ transform:rotate(45deg); }
+    details.q p{ padding:0 1.1rem 1.1rem; font-size:.9rem; color:rgba(0,0,0,.7); font-weight:500; }
+
+    /* footer */
+    footer{ background:var(--deep); color:#fff; border-top:2px solid #000; }
+    footer .wrap{ padding:2rem 1rem; text-align:center; }
+    .f-logo{ display:inline-flex; align-items:center; gap:.6rem; font-family:"Poppins",sans-serif; font-weight:800; font-size:1.4rem; letter-spacing:-.03em; }
+    .f-logo .ia{ color:var(--lime); }
+    .f-logo .mk{ width:2rem; height:2rem; display:grid; place-items:center; background:var(--lime); border-radius:.4rem; }
+    footer p{ margin-top:.9rem; font-size:.8rem; color:rgba(255,255,255,.5); max-width:34rem; margin-left:auto; margin-right:auto; }
+    .f-access{ display:inline-flex; align-items:center; gap:.5rem; margin-top:1.1rem; background:var(--lime); color:#000; border:2px solid #000; border-radius:.8rem; box-shadow:4px 4px 0 0 #000; padding:.7rem 1.2rem; font-family:"Poppins",sans-serif; font-weight:800; font-size:.92rem; cursor:pointer; }
+
+    /* barra fixa de aceite (mobile) */
+    .sticky{ position:fixed; left:0; right:0; bottom:0; z-index:900; display:flex; align-items:center; justify-content:space-between; gap:.75rem; padding:.6rem .85rem; padding-bottom:calc(.6rem + env(safe-area-inset-bottom)); background:var(--deep); border-top:2px solid #000; transform:translateY(120%); transition:transform .3s cubic-bezier(.2,.8,.2,1); }
+    .sticky.show{ transform:translateY(0); }
+    .sticky .sp{ display:flex; flex-direction:column; line-height:1.05; flex-shrink:0; color:#fff; }
+    .sticky .sp small{ font-size:.62rem; font-weight:700; color:rgba(255,255,255,.55); text-decoration:line-through; }
+    .sticky .sp b{ font-family:"Poppins",sans-serif; font-weight:800; font-size:1.35rem; color:var(--lime); letter-spacing:-.02em; }
+    .sticky button{ flex-shrink:0; display:inline-flex; align-items:center; gap:.4rem; background:var(--lime); color:#000; font-family:"Poppins",sans-serif; font-weight:800; font-size:.95rem; border:2px solid #000; border-radius:.7rem; padding:.7rem 1.1rem; box-shadow:4px 4px 0 0 #000; cursor:pointer; }
+    @media(min-width:640px){ .sticky{ justify-content:center; gap:1.75rem; } }
+
+    .arrow{ width:1.1em; height:1.1em; }
+    @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .btn-press,.cta-pulse,.sticky{ transition:none; animation:none; } }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ HERO: CONFIRMAÇÃO ============ -->
+  <header class="hero grid-pattern-dark">
+    <div class="wrap">
+      <img src="imagens/logo-plania.png" alt="PlanIA — planilhas com IA" class="logo" />
+
+      <div style="margin-top:1.4rem">
+        <span class="badge">✓ PAGAMENTO APROVADO</span>
+      </div>
+
+      <div class="check-ring">
+        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>
+      </div>
+
+      <h1 class="h1">Pronto! Seu acesso já<br>está liberado 🎉</h1>
+      <p class="lede">Parabéns pela decisão. Você acabou de dar o passo que vai mudar a sua relação com planilhas pra sempre.</p>
+
+      <div class="mail-note">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--lime)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        <span>Enviamos seu login e o link da área de membros pro seu e-mail. Não achou? Olhe em <strong>spam</strong> ou <strong>promoções</strong>.</span>
+      </div>
+
+      <div class="steps">
+        <span class="step done"><span class="dot">✓</span> Pedido confirmado</span>
+        <span class="step-line"></span>
+        <span class="step now"><span class="dot">2</span> Oferta exclusiva</span>
+        <span class="step-line"></span>
+        <span class="step"><span class="dot">3</span> Área de membros</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ FAIXA: ESPERE ============ -->
+  <div class="wait-band">
+    <div class="inner">
+      <span>⚠️ ESPERE — não feche esta página!</span>
+      <span style="font-weight:600;opacity:.92">Seu acesso já está garantido. Tem só mais uma coisa 👇</span>
+    </div>
+  </div>
+
+  <!-- ============ OTO: PACK OFFICE COMPLETO ============ -->
+  <section class="oto">
+    <div class="wrap">
+      <p class="kicker">Oferta única · só aparece aqui, agora</p>
+      <h2 class="h2">Você vai criar planilhas com IA. Que tal já levar o <em>arsenal pronto</em> junto?</h2>
+      <p class="sub">No curso você aprende a criar tudo do zero com a IA. Mas pra quem quer ir <strong>ainda mais rápido</strong>, separamos um pacote com centenas de modelos prontos de Office pra você só abrir, editar e usar — hoje.</p>
+
+      <!-- CARD DO PRODUTO -->
+      <div class="pack">
+        <div class="pack-top">
+          <span class="pack-tag">⚡ SÓ NESTA PÁGINA</span>
+          <div class="pack-name">Pack Office Completo <span class="yr">2026</span></div>
+          <p class="pack-desc">Mais de 300 templates profissionais de Excel, Word, PowerPoint e Power BI — prontos pra editar em segundos.</p>
+        </div>
+
+        <div class="pack-body">
+          <div class="items">
+            <div class="item">
+              <div class="ic ic-xls">X</div>
+              <div>
+                <div class="item-h">Templates no Excel</div>
+                <div class="item-p">Financeiro, vendas, estoque, fluxo de caixa, RH e mais — só trocar os dados.</div>
+                <div class="item-val"><s>R$ 97</s> incluso</div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="ic ic-doc">W</div>
+              <div>
+                <div class="item-h">Templates no Word</div>
+                <div class="item-p">Contratos, propostas, currículos, relatórios e documentos prontos pra preencher.</div>
+                <div class="item-val"><s>R$ 67</s> incluso</div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="ic ic-ppt">P</div>
+              <div>
+                <div class="item-h">Templates no PowerPoint 2026</div>
+                <div class="item-p">Apresentações modernas pra impressionar chefe e cliente sem perder horas montando.</div>
+                <div class="item-val"><s>R$ 77</s> incluso</div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="ic ic-pbi">BI</div>
+              <div>
+                <div class="item-h">Templates no Power BI</div>
+                <div class="item-p">Dashboards interativos e conectados, do nível "relatório de gente grande".</div>
+                <div class="item-val"><s>R$ 127</s> incluso</div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="ic ic-cht">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+              </div>
+              <div>
+                <div class="item-h">Gráficos e Dashboards</div>
+                <div class="item-p">Biblioteca de gráficos e painéis prontos pra colar nos seus relatórios.</div>
+                <div class="item-val"><s>R$ 87</s> incluso</div>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="ic ic-gift">🎁</div>
+              <div>
+                <div class="item-h">Bônus Exclusivos</div>
+                <div class="item-p">Extras surpresa que só quem pega o Pack nesta página recebe.</div>
+                <div class="item-val"><s>R$ 47</s> incluso</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROVA VISUAL -->
+          <div class="proof">
+            <p class="proof-label">Alguns modelos que já vêm prontos:</p>
+            <div class="proof-row">
+              <img src="planilhas%20exemplos/dashvendas.jpg" alt="Dashboard de vendas pronto" loading="lazy" />
+              <img src="planilhas%20exemplos/1_vMTpFA_OLXgFI3Gih77sxg.jpg" alt="Relatório em Power BI pronto" loading="lazy" />
+              <img src="planilhas%20exemplos/2020-03-24-16_52_41-Dashboard-SAC-Dark-Power-BI-Desktop-1024x575.jpg" alt="Dashboard de atendimento pronto" loading="lazy" />
+              <img src="planilhas%20exemplos/DASHBOARD-1-1024x575.jpg" alt="Dashboard de indicadores pronto" loading="lazy" />
+              <img src="planilhas%20exemplos/260120221643174101cursodepowerbiparaempresas.jpg" alt="Painel gerencial pronto" loading="lazy" />
+            </div>
+          </div>
+        </div>
+
+        <!-- PREÇO -->
+        <div class="pricebox">
+          <p class="stack-sum">Valor real do pacote: <s>R$ 502</s> — hoje, só aqui:</p>
+          <div class="price-now">
+            <span class="cur">R$</span>
+            <span class="val">19</span>
+            <span class="price-cents">,90</span>
+          </div>
+          <span class="once">💳 Pagamento único · acesso vitalício</span>
+        </div>
+
+        <button class="cta-accept cta-pulse btn-press" type="button" onclick="aceitarUpsell()">
+          SIM! Quero adicionar o Pack ao meu pedido
+          <svg viewBox="0 0 24 24" class="arrow" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <p class="cta-note">✅ <strong>Você não digita o cartão de novo.</strong> É 1 clique e o Pack entra no pedido que você acabou de fazer.</p>
+
+        <div class="decline">
+          <button type="button" onclick="recusarUpsell()">Não, obrigado. Não quero o Pack completo agora.</button>
+        </div>
+      </div>
+
+      <div class="trust">
+        <span>🔒 Compra 100% segura</span>
+        <span>⚡ Acesso imediato</span>
+        <span>🛡️ 7 dias de garantia</span>
+        <span>♾️ Acesso vitalício</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GARANTIA ============ -->
+  <section class="guarantee grid-pattern">
+    <div class="wrap wrap-sm">
+      <div class="g-card">
+        <img src="imagens/selo-garantia-7-dias.png" alt="Selo de garantia de 7 dias" />
+        <div>
+          <h3>O risco é todo meu</h3>
+          <p>O Pack também tem <strong>7 dias de garantia incondicional</strong>. Se você abrir os templates e sentir que não é pra você, devolvemos <strong>100% do valor</strong> — sem pergunta chata.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ CURTO ============ -->
+  <section class="faq">
+    <div class="wrap wrap-sm">
+      <h2>Ainda em dúvida?</h2>
+
+      <details class="q">
+        <summary>Vou precisar pagar de novo ou digitar o cartão? <span class="plus">+</span></summary>
+        <p>Não. Como você já comprou agora há pouco, o Pack é adicionado com 1 clique usando o mesmo pagamento. É só confirmar.</p>
+      </details>
+
+      <details class="q">
+        <summary>Como eu recebo o Pack Office? <span class="plus">+</span></summary>
+        <p>Na hora. Assim que confirmar, os templates aparecem na sua área de membros junto com o curso, prontos pra baixar e usar.</p>
+      </details>
+
+      <details class="q">
+        <summary>Preciso saber Excel ou Power BI pra usar? <span class="plus">+</span></summary>
+        <p>Não. Os modelos já vêm prontos: você só abre, troca os dados pelos seus e está feito. E com o que aprende no curso, ainda edita o que quiser com a IA.</p>
+      </details>
+
+      <details class="q">
+        <summary>Essa oferta volta a aparecer depois? <span class="plus">+</span></summary>
+        <p>Não. Esse preço do Pack só existe aqui, nesta página, agora. Se você sair sem pegar, ele volta ao valor cheio.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="wrap">
+      <div class="f-logo">
+        <span class="mk">
+          <svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="3" fill="#0E4D32"/><path d="M3 9.5h18M3 15h18M9.5 3v18M15 3v18" stroke="#6FE3A4" stroke-width="1.4"/></svg>
+        </span>
+        Plan<span class="ia">IA</span>
+      </div>
+      <p>Seu acesso já está garantido. Você pode entrar na área de membros a qualquer momento pelo botão abaixo ou pelo link enviado no seu e-mail.</p>
+      <button class="f-access" type="button" onclick="irAreaMembros()">
+        Acessar minha área de membros
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <p style="margin-top:1.4rem;font-size:.72rem;color:rgba(255,255,255,.4)">© 2026 PlanIA. Todos os direitos reservados. Este produto não garante resultados financeiros, eles dependem do seu esforço e aplicação.</p>
+    </div>
+  </footer>
+
+  <!-- ===== BARRA FIXA DE ACEITE ===== -->
+  <div id="sticky" class="sticky">
+    <span class="sp">
+      <small>R$ 502</small>
+      <b>R$ 19,90</b>
+    </span>
+    <button type="button" onclick="aceitarUpsell()">
+      Adicionar o Pack
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+
+  <script>
+    /* =========================================================
+       >>> CONFIGURAÇÃO — TROQUE OS 2 LINKS ABAIXO <<<
+       --------------------------------------------------------- */
+    // 1) Link de pagamento (1 clique) do Pack — botão "SIM, quero adicionar":
+    var CHECKOUT_UPSELL  = 'https://pay.wiapy.com/6a42578171f7fb05254731b6';
+    // 2) Link do botão "Não, obrigado" (recusa do Pack):
+    var URL_RECUSA       = 'https://pay.wiapy.com/ZP3bNaZY1k';
+    // 3) Link da sua área de membros — botão do rodapé:
+    var URL_AREA_MEMBROS = 'https://COLE_O_LINK_DA_SUA_AREA_DE_MEMBROS';
+    /* ========================================================= */
+
+    // mantém os UTMs do anúncio ao seguir pros links
+    function withUtms(url){
+      var qs = window.location.search;
+      if(!qs || qs.length < 2) return url;
+      return url + (url.indexOf('?') === -1 ? '?' : '&') + qs.substring(1);
+    }
+
+    function aceitarUpsell(){
+      if (window.fbq) fbq('track', 'AddToCart', { value: 19.90, currency: 'BRL' });
+      window.location.href = withUtms(CHECKOUT_UPSELL);
+    }
+    function recusarUpsell(){
+      window.location.href = withUtms(URL_RECUSA);
+    }
+    function irAreaMembros(){
+      window.location.href = withUtms(URL_AREA_MEMBROS);
+    }
+
+    // barra fixa: aparece depois que o usuário rola além do hero
+    (function(){
+      var bar = document.getElementById('sticky');
+      var hero = document.querySelector('header.hero');
+      var footer = document.querySelector('footer');
+      if(!bar || !('IntersectionObserver' in window)) return;
+      var pastHero = false, inFooter = false;
+      function update(){ bar.classList.toggle('show', pastHero && !inFooter); }
+      if(hero) new IntersectionObserver(function(e){ pastHero = !e[0].isIntersecting; update(); }, {threshold:0}).observe(hero);
+      if(footer) new IntersectionObserver(function(e){ inFooter = e[0].isIntersecting; update(); }, {threshold:0.05}).observe(footer);
+    })();
+
+    // BACK REDIRECT: se a pessoa apertar "voltar"/tentar sair, leva pro
+    // downsell com desconto (mesmo link do "Não, obrigado").
+    (function(){
+      try {
+        history.pushState(null, '', location.href);
+        window.addEventListener('popstate', function(){
+          window.location.href = withUtms(URL_RECUSA);
+        });
+      } catch(e){}
+    })();
+  </script>
+</body>
+</html>
