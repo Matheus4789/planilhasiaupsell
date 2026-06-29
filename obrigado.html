@@ -193,6 +193,23 @@
     .decline button{ background:none; border:none; cursor:pointer; font-family:inherit; font-size:.85rem; font-weight:700; color:rgba(0,0,0,.45); text-decoration:underline; text-underline-offset:3px; }
     .decline button:hover{ color:rgba(0,0,0,.75); }
 
+    /* deixa o botão gerado pelo widget wiapy com o visual neo-brutal de antes */
+    #wiapy_upsell{ text-align:center; }
+    .wiapy-accept-styled{
+      display:flex !important; align-items:center; justify-content:center; gap:.5rem;
+      width:100% !important; box-sizing:border-box;
+      font-family:"Poppins",sans-serif !important; font-weight:800 !important;
+      color:#fff !important; border:2px solid #000 !important; border-radius:1rem !important;
+      box-shadow:6px 6px 0 0 #000 !important; padding:1.05rem 1rem !important;
+      text-decoration:none !important; line-height:1.12 !important;
+      animation:cta-pulse 2.2s ease-in-out infinite;
+      transition:transform .2s cubic-bezier(.175,.885,.32,1.275), box-shadow .2s !important;
+    }
+    .wiapy-accept-styled::after{ content:"→"; font-family:"Poppins",sans-serif; font-weight:800; }
+    .wiapy-accept-styled:hover{ animation:none; transform:translate(4px,4px) !important; box-shadow:0 0 0 0 #000 !important; }
+    /* link de recusa do widget: centralizado e discreto */
+    .wiapy-refusal-styled{ display:inline-block !important; margin-top:.9rem !important; font-family:"Inter",sans-serif !important; font-size:.82rem !important; font-weight:700 !important; }
+
     /* selos de confiança */
     .trust{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:.5rem; margin:1.4rem auto 0; max-width:42rem; }
     .trust span{ display:inline-flex; align-items:center; gap:.35rem; background:#fff; border:2px solid #000; border-radius:9999px; padding:.3rem .75rem; font-size:.74rem; font-weight:800; }
@@ -395,10 +412,10 @@
               linkUrl: "https://pay.wiapy.com/checkout/6a425d34de883dd348db4736",
               linkText: "SIM, EU ACEITO ESSA OFERTA",
               styles: {
-                  backgroundColor: "#00d769",
-                  hoverBackgroundColor: "#00b85a",
-                  fontSize: "17px",
-                  borderRadius: "10px"
+                  backgroundColor: "#1FA463",
+                  hoverBackgroundColor: "#147A45",
+                  fontSize: "18px",
+                  borderRadius: "16px"
               },
               refusalLinkUrl: "https://wiapy.com/login",
               refusalLinkText: "Recusar está oferta",
@@ -553,6 +570,31 @@
       if(!m) return;
       m.addEventListener('click', function(e){ if(e.target === m) fecharPopup(); });
       document.addEventListener('keydown', function(e){ if(e.key === 'Escape') fecharPopup(); });
+    })();
+
+    // aplica o visual neo-brutal ao botão que o widget wiapy gera
+    (function(){
+      var box = document.getElementById('wiapy_upsell');
+      if(!box) return;
+      function estilizar(){
+        var els = box.querySelectorAll('a, button');
+        if(!els.length) return false;
+        var achou = false;
+        els.forEach(function(el){
+          var t = (el.textContent || '').toUpperCase();
+          if(t.indexOf('ACEITO') > -1 || t.indexOf('SIM') > -1){
+            el.classList.add('wiapy-accept-styled'); achou = true;
+          } else if(t.indexOf('RECUSAR') > -1 || t.indexOf('RECUSO') > -1){
+            el.classList.add('wiapy-refusal-styled');
+          }
+        });
+        return achou;
+      }
+      if(!estilizar() && 'MutationObserver' in window){
+        var obs = new MutationObserver(function(){ if(estilizar()) obs.disconnect(); });
+        obs.observe(box, { childList:true, subtree:true });
+        setTimeout(function(){ obs.disconnect(); }, 6000);
+      }
     })();
 
     // barra fixa: aparece depois que o usuário rola além do hero
